@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Card from 'Card';
+import Field from 'Field';
+import Player from 'Player';
 
 class MainApp extends React.Component {
 
@@ -11,73 +12,9 @@ class MainApp extends React.Component {
 		return (
 			<div className="wrapper">
 				<div className="left">
-					<div className="player" id="player2">
-						<div className="Hand">
-							<div className="Card">
-							</div>
-							<div className="Card">
-								
-							</div>
-							<div className="Card">
-								
-							</div>
-						</div>
-						<div className="ManaHp">
-							<div className="hp">
-								<div className="alert progress">
-									<div className="progress-meter" style={{width: "50%"}}>10/20</div>
-								</div>
-							</div>
-							<div className="mana">
-								<div className="progress">
-									<div className="progress-meter" style={{width:'0%'}}>0/9</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="field">
-						<div className="forces" id="player2">
-							<div className="Card">
-								<Card card={{
-									name: 'Kitten',
-									
-								}} />
-							</div>
-						</div>
-						<div className="forces" id="player1">
-							<div className="Card">
-								
-							</div>
-							<div className="Card">
-								
-							</div>
-						</div>
-					</div>
-					<div className="player" id="player1">
-						<div className="Hand">
-							<div className="Card">
-								
-							</div>
-							<div className="Card">
-								
-							</div>
-							<div className="Card">
-								
-							</div>
-						</div>
-						<div className="ManaHp">
-							<div className="hp">
-								<div className="alert progress">
-									<div className="progress-meter" style={{width: "75%"}}>15/20</div>
-								</div>
-							</div>
-							<div className="mana">
-								<div className="progress">
-									<div className="progress-meter" style={{width:'50%'}}>5/10</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<Player player='player2' mana={0} maxMana={9} hp={10}/>
+					<Field />
+					<Player player='player1' mana={5} maxMana={10} hp={15}/>
 				</div>
 				<div className="right">
 					<div className="Turn">
