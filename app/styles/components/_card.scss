@@ -1,0 +1,74 @@
+.card {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	background-color: $card-layer1-color;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+	font-size:1vw;
+
+	.topCard {
+		flex:2;
+		display: flex;
+		.imageCard {
+			background-image: $card0;
+			background-color: $card-layer1-color;
+			background-size: cover;
+			background-repeat: no-repeat;
+			border-radius:50%;
+			border: 4px solid black;
+			padding: 20px;
+			flex:5;
+		}
+		.nameCard{
+			flex:1;
+			text-align: center;
+			color:white;
+		}
+	}
+
+	.bottomCard {
+		flex:1;
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		background-color: $card-layer2-color;
+		position: relative;
+		margin: 5px 10px;
+		text-align: center;
+		.abilitiesCard {
+			flex:5;
+		}
+		.typeCard {
+			flex:1;
+		}
+	}
+	.manaCard, .atkCard, .hpCard {
+		position: absolute;
+		border-radius:50%;
+		border: 1px solid black;
+		padding:5px;
+		text-align: center;
+		color:white;
+	}
+	.manaCard {
+		top:0;
+		left:0;
+		background-color:blue;
+	}
+	.atkCard {
+		bottom:0;
+		left:0;
+		background-color:yellow;
+		border-radius:50%;
+	}
+	.hpCard {
+		bottom:0;
+		right:0;
+		background-color:red;
+	}
+}
+

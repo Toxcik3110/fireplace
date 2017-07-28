@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Card from 'Card';
+
 class MainApp extends React.Component {
 
 	constructor(props) {
@@ -12,7 +14,6 @@ class MainApp extends React.Component {
 					<div className="player" id="player2">
 						<div className="Hand">
 							<div className="Card">
-								
 							</div>
 							<div className="Card">
 								
@@ -37,7 +38,10 @@ class MainApp extends React.Component {
 					<div className="field">
 						<div className="forces" id="player2">
 							<div className="Card">
-								
+								<Card card={{
+									name: 'Kitten',
+									
+								}} />
 							</div>
 						</div>
 						<div className="forces" id="player1">
