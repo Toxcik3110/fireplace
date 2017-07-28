@@ -10,7 +10,6 @@ class Forces extends React.Component {
 	}
 	render() {
 		var {cards, player} = this.props;
-		console.log(this.props);
 		var car = <h1>'ERROR'</h1>;
 		if (cards) {
 			car = cards.map((card) => {
@@ -19,7 +18,9 @@ class Forces extends React.Component {
 		}
 		return (
 		<div className="forces" id={player}>
+			<div className="cardGap"></div>
 			{car}
+			<div className="cardGap"></div>
 		</div>
 		);
 	}

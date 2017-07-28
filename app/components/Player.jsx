@@ -1,7 +1,6 @@
 import React from 'react';
 import uuid from 'node-uuid';
 
-import Card from 'Card';
 import Hand from 'Hand';
 
 class Player extends React.Component {

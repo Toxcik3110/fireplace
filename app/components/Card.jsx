@@ -12,12 +12,10 @@ class Card extends React.Component {
 		}
 	}
 	render() {
-		var classes = 'cardd ' + this.state.classes;
+		var classes = this.state.classes + ' Card';
 		return (
-		<div className="Card">
-			<div className={classes}>
-
-			</div>
+		<div className={classes}>
+		
 		</div>
 		);
 	}

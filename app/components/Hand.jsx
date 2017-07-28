@@ -15,7 +15,9 @@ class Hand extends React.Component {
 		})
 		return (
 		<div className="Hand">
+			<div className="cardGap"></div>
 			{cardItems}
+			<div className="cardGap"></div>
 		</div>
 		);
 	}

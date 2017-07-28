@@ -10,8 +10,8 @@ class Field extends React.Component {
 	render() {
 		return (
 			<div className="field">
-				<Forces cards={[{classes:'card1'}]} player={'player2'} />
-				<Forces cards={[{},{}]} player={'player1'}/>
+				<Forces cards={[{classes:'card1'}]} player={'blue'} />
+				<Forces cards={[{},{},{},{}]} player={'red'}/>
 			</div>
 		);
 	}

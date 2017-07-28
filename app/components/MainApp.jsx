@@ -2,6 +2,7 @@ import React from 'react';
 
 import Field from 'Field';
 import Player from 'Player';
+import Decks from 'Decks';
 
 class MainApp extends React.Component {
 
@@ -16,23 +17,7 @@ class MainApp extends React.Component {
 					<Field />
 					<Player player='player1' mana={5} maxMana={10} hp={15}/>
 				</div>
-				<div className="right">
-					<div className="Turn">
-						Player2
-					</div>
-					<div className="CardDeck">
-						
-					</div>
-					<div className="Turn">
-						<button className="Player" id="player1">Your turn</button>
-					</div>
-					<div className="CardDeck">
-						
-					</div>
-					<div className="Turn">
-						Player1
-					</div>
-				</div>
+				<Decks />
 			</div>
 		);
 	}
