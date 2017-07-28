@@ -21,6 +21,14 @@ module.exports = {
 		filename: './public/bundle.js',
 	},
 	resolve: {
+		modules: [
+			path.resolve(__dirname, 'node_modules'),
+			path.resolve(__dirname,'app/components/'),
+			path.resolve(__dirname,'app/actions/'),
+			path.resolve(__dirname,'app/reducers/'),
+			path.resolve(__dirname,'app/store/'),
+			path.resolve(__dirname,'app/api/')
+		],
 		alias: {
 			applicationStyles: path.resolve(__dirname, 'app/styles/app.scss'),
 		},
@@ -36,7 +44,8 @@ module.exports = {
 				query: {
 					presets: [
 						'react',
-						'es2015'
+						'es2015',
+						'stage-0'
 					],
 				},
 				test: /\.jsx?$/,
