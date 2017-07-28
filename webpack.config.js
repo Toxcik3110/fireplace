@@ -1,6 +1,11 @@
 var path = require('path');
 var webpack = require('webpack')
 
+const env = process.env.NODE_ENV
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+
 module.exports = {
 	entry: [
 		'script-loader!jquery',
@@ -50,6 +55,27 @@ module.exports = {
 				},
 				test: /\.jsx?$/,
 				exclude: /(node_modules|bower_components)/,
+			},
+			// {
+			// 	test: /\.css$/,
+			// 	use: env === 'production'
+			// 	? ExtractTextPlugin.extract({
+			// 		fallback: 'style-loader',
+			// 		use: [ 'css-loader' ]
+			// 	})
+			// 	: [ 'style-loader', 'css-loader' ]
+			// },
+			// {
+			// 	test: /\.scss$/,
+			// 	include: path.join(__dirname, 'scss'),
+			// 	loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+			// },
+			{
+				loader: 'url-loader',
+				test: /\.(png|jpg)$/,
+				options: {
+					limit: 10
+				},
 			}
 		],
 	},
