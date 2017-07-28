@@ -5,23 +5,11 @@ class MainApp extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-
-				// <h1 className='page-title'>Todo App</h1>
-				// <div className="grid-x grid-margin-x">
-				// 	<div className="auto cell"></div>
-				// 	<div className="medium-6 large-4 cell container">
-				// 		<TodoSearch />
-				// 		<TodoList />
-				// 		<AddTodo />
-				// 	</div>
-				// 	<div className="auto cell"></div>
-				// </div>
-				// <h1 class='page-title'>{'Fireplace'.toUpperCase()}</h1>
 	render() {
 		return (
 			<div className="wrapper">
 				<div className="left">
-					<div className="player2">
+					<div className="player" id="player2">
 						<div className="Hand">
 							<div className="Card">
 								
@@ -47,14 +35,21 @@ class MainApp extends React.Component {
 						</div>
 					</div>
 					<div className="field">
-						<div className="forces2">
-							
+						<div className="forces" id="player2">
+							<div className="Card">
+								
+							</div>
 						</div>
-						<div className="forces1">
-							
+						<div className="forces" id="player1">
+							<div className="Card">
+								
+							</div>
+							<div className="Card">
+								
+							</div>
 						</div>
 					</div>
-					<div className="player1">
+					<div className="player" id="player1">
 						<div className="Hand">
 							<div className="Card">
 								
@@ -82,18 +77,19 @@ class MainApp extends React.Component {
 				</div>
 				<div className="right">
 					<div className="Turn">
-					
+						Player2
 					</div>
 					<div className="CardDeck">
 						
 					</div>
 					<div className="Turn">
-						<button className="Player">Your turn</button>
+						<button className="Player" id="player1">Your turn</button>
 					</div>
 					<div className="CardDeck">
 						
 					</div>
 					<div className="Turn">
+						Player1
 					</div>
 				</div>
 			</div>

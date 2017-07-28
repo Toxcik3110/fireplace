@@ -17,7 +17,7 @@
 	flex-direction:column;
 	align-items:center;
 	justify-content:center;
-	background-color:#0e0;
+	background-color:#5ef;
 }
 
 .CardDeck {
@@ -33,21 +33,14 @@
 .Turn {
 	flex:1;
 	padding: 20px;
+	text-align:center;
 }
 
 .Player {
 	padding:5px 10px;
-	background-color:green;
 	border: 2px green solid;
 	border-radius: 9%;
 }
-
-	.player1 {
-		background-color:#ee0;
-		flex:1;
-		display:flex;
-	}
-
 	.field {
 		background-color:#eee;
 		flex:3;
@@ -56,18 +49,32 @@
 		justify-content:space-around;
 	}
 
-		.forces1 {
-			flex:1;
-			background-color:#3a3;
-		}
+	#player1 {
+		background-color:#3e3;
+	}
 
-		.forces2 {
-			flex:1;
-			background-color:#e33;
-		}
+	#player2 {
+		background-color:#e33;
+	}
 
-	.player2 {
-		background-color:#0ee;
+	.forces {
+		flex:1;
+
+		display: flex;
+		justify-content: center;
+		align-items:center;
+
+		.Card {
+			width: 100px;
+			height: 140px;
+			margin: 0px 10px;
+			background: $cardback_50;
+			background-size:contain;
+			background-repeat: no-repeat;
+		}
+	}
+
+	.player {
 		flex:1;
 		display:flex;
 	}
@@ -77,7 +84,6 @@
 		display: flex;
 		justify-content: center;
 		align-items:center;
-	}
 
 		.Card {
 			width: 70px;
@@ -87,6 +93,7 @@
 			background-size:contain;
 			background-repeat: no-repeat;
 		}
+	}
 
 	.ManaHp {
 		flex:1;
