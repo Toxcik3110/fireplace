@@ -11,7 +11,7 @@ class Field extends React.Component {
 		return (
 			<div className="field">
 				<Forces cards={[{classes:'card1'}]} player={'blue'} />
-				<Forces cards={[{},{},{},{}]} player={'red'}/>
+				<Forces cards={[{classes:'card2'},{classes:'card3'},{classes:'card3'},{classes:'card1'}]} player={'red'}/>
 			</div>
 		);
 	}

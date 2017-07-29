@@ -10,6 +10,7 @@
 	display:flex;
 	flex-direction:column;
 	justify-content:space-between;
+	z-index:-2;
 }
 .right {
 	flex:1;
@@ -32,7 +33,7 @@
 
 .Turn {
 	flex:1;
-	padding: 20px;
+	// padding: 20px;
 	text-align:center;
 }
 
@@ -40,6 +41,7 @@
 	padding:5px 10px;
 	border: 2px green solid;
 	border-radius: 9%;
+	z-index:-2;
 }
 	.field {
 		background-color:#9C8E7C;
@@ -47,6 +49,7 @@
 		display:flex;
 		flex-direction: column;
 		justify-content:space-around;
+		z-index:-2;
 	}
 
 	#player1 {
@@ -67,11 +70,12 @@
 		align-items:center;
 
 		margin:10px;
+		z-index:-2;
 
 		.Card {
-			width:100%;
+			width:11vw;
 			height:100%;
-			
+			// z-index:0;
 			background-size: contain;
 			background-position: center;
 			background-image: $cardback_50;
@@ -79,13 +83,35 @@
 			position: relative;
 			// margin:10px;
 
-			flex:1;
+			// flex:1;
 			display:flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: space-between;
 		}
 	}
+
+	.Hand .cardFrame, .forces .cardFrame {
+		background-image:$card-frame;
+		// background-size: 20% 50%;
+		// background-position: 52% 10%;
+		// border-radius: 40%;
+		border: 1px solid transparent;
+	}
+	.innerCard {
+		position: absolute;
+		left:26%;
+		top:2%;
+		width: 52%;
+		height: 51%;
+		z-index:-1;
+		background-size: 100%;
+		border-radius: 42%;
+		background-repeat: no-repeat;
+	}
+	.card1 {background-image: $card1;}
+	.card2 {background-image: $card2;}
+	.card3 {background-image: $card3;}
 
 	.player {
 		flex:1;
