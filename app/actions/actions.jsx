@@ -28,3 +28,25 @@ export var placeCard = (player, card) => {
 		card,
 	}
 }
+
+export var selectCard = (player, card) => {
+	return {
+		type:'SELECT_CARD',
+		player,
+		card,
+	}
+}
+
+export var attackCard = (playerCard, enemyCard) => {
+	return {
+		type:'ATTACK_CARD',
+		playerCard,
+		enemyCard,
+	}
+}
+
+export var deselectCard = () => {
+	return {
+		type:'DESELECT_CARD',
+	}
+}

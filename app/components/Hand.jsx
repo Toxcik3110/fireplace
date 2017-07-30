@@ -19,10 +19,10 @@ export class Hand extends React.Component {
 		if(hand) cardItems = hand.map((card) => {
 			return (<Card 
 				key={card.id} 
-				mana={card.mana} 
-				atk={card.atk} 
-				hp={card.hp}
-				classes={card.classes ? card.classes : ''} 
+				{...card}
+				classes={card.classes ? card.classes : ''}
+				player={player}
+				whereIs={'Hand'}
 				onClick={(e) => {
 					if(card.mana <= currentPlayer.mana && forces.length < 7) {
 						dispatch(actions.placeCard(player, card));

@@ -2,6 +2,7 @@ import React from 'react';
 import uuid from 'node-uuid';
 import {connect} from 'react-redux';
 
+import * as actions from 'actions';
 import Card from 'Card';
 
 export class Forces extends React.Component {
@@ -10,7 +11,7 @@ export class Forces extends React.Component {
 		super(props);
 	}
 	render() {
-		var {player, eForces, pForces, playerTurn, dispatch, p, e} = this.props;
+		var {player, eForces, pForces, playerTurn, dispatch, p, e, user} = this.props;
 		var car = <h1>'ERROR'</h1>;
 		var forces = player == 'player' ? pForces : eForces;
 		var currentPlayer = player == 'player' ? p : e;
@@ -18,12 +19,18 @@ export class Forces extends React.Component {
 			car = forces.map((card) => {
 				return (<Card 
 				key={card.id} 
-				mana={card.mana} 
-				atk={card.atk} 
-				hp={card.hp}
+				{...card}
+				whereIs={'Forces'}
 				classes={card.classes ? card.classes : ''}
 				onClick={(e) => {
-					// alert(player)
+					console.log(card)
+					if(user.selectedCard && playerTurn !== player) {
+						dispatch(actions.attackCard(user.selectedCard, card));
+					} else if (!user.selectedCard && playerTurn === player && card.turn > 0) {
+						dispatch(actions.selectCard(player, card));
+					} else if (user.selectedCard === card) {
+						dispatch(actions.deselectCard());
+					}
 				}} 
 				/>)
 			});
@@ -46,6 +53,7 @@ export default connect(
 			playerTurn:state.turn,
 			p:state.player,
 			e:state.enemy,
+			user:state.user,
 		}
 	}
 )(Forces);

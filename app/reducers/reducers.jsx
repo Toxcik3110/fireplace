@@ -1,23 +1,49 @@
 import uuid from 'node-uuid';
 
+var createCard = (classes, mana, hp, atk) => {
+	return {
+		classes,
+		mana,
+		hp,
+		atk,
+		selected:false,
+		turn:false,
+	}
+}
+
 var collection = [
 	{
 		classes:'card1',
 		mana: 3,
+		baseMana: 3,
 		hp: 4,
+		baseHp: 4,
 		atk: 6,
+		baseAtk: 6,
+		turn:0,
+		baseTurn:1,
 	},
 	{
 		classes:'card2',
 		mana: 1,
+		baseMana: 1,
 		hp: 1,
+		baseHp: 1,
 		atk: 1,
+		baseAtk: 1,
+		turn:0,
+		baseTurn:1,
 	},
 	{
 		classes:'card3',
 		mana: 2,
+		baseMana: 2,
 		hp: 3,
+		baseHp: 3,
 		atk: 2,
+		baseAtk: 2,
+		turn:0,
+		baseTurn:1,
 	}
 ];
 
@@ -115,6 +141,12 @@ export var playerHandReducer = (state = [], action) => {
 
 export var playerForcesReducer = (state = [], action) => {
 	switch(action.type) {
+		case 'END_TURN':
+			if(action.player == 'enemy') {
+				return state.map((card) => {card.turn = card.baseTurn; return card});
+			} else {
+				return state;
+			}
 		case 'PLACE_CARD':
 			if(action.player == 'player') {
 				return [
@@ -124,6 +156,19 @@ export var playerForcesReducer = (state = [], action) => {
 			} else {
 				return state;
 			}
+		case 'ATTACK_CARD': 
+			var newState = state.map((card) => { 
+				if(action.playerCard.id === card.id) {
+					card.hp -= action.enemyCard.atk;
+					card.turn--;
+				}
+				if(action.enemyCard.id === card.id) {
+					card.hp -= action.playerCard.atk;	
+					card.turn--;
+				}
+				return card;
+			})
+			return newState.filter((card) => { return card.hp > 0 });
 		default:
 			return state;
 	}
@@ -212,6 +257,12 @@ export var enemyHandReducer = (state = [], action) => {
 
 export var enemyForcesReducer = (state = [], action) => {
 	switch(action.type) {
+		case 'END_TURN':
+			if(action.player == 'player') {
+				return state.map((card) => {card.turn = card.baseTurn; return card});
+			} else {
+				return state;
+			}
 		case 'PLACE_CARD':
 			if(action.player == 'enemy') {
 				return [
@@ -221,6 +272,19 @@ export var enemyForcesReducer = (state = [], action) => {
 			} else {
 				return state;
 			}
+		case 'ATTACK_CARD': 
+			var newState = state.map((card) => { 
+				if(action.playerCard.id === card.id) {
+					card.hp -= action.enemyCard.atk;
+					card.turn--;
+				}
+				if(action.enemyCard.id === card.id) {
+					card.hp -= action.playerCard.atk;	
+					card.turn--;
+				}
+				return card;
+			})
+			return newState.filter((card) => { return card.hp > 0 });
 		default:
 			return state;
 	}
@@ -235,8 +299,28 @@ export var turnReducer = (state = 'player', action) => {
 	}
 }
 
-export var userReducer = (state = {}, action) => {
+export var userReducer = (state = {selectedCard:undefined}, action) => {
 	switch(action.type) {
+		case 'END_TURN':
+			return {
+				...state,
+				selectedCard:undefined,
+			}
+		case 'DESELECT_CARD':
+			return {
+				...state,
+				selectedCard:undefined,
+			}
+		case 'SELECT_CARD':
+			return {
+				...state,
+				selectedCard:action.card,
+			}
+		case 'ATTACK_CARD':
+			return {
+				...state,
+				selectedCard:undefined,
+			}
 		default:
 			return state;
 	}

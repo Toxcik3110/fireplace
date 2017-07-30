@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Card extends React.Component {
 
@@ -6,12 +7,19 @@ class Card extends React.Component {
 		super(props);
 	}
 	render() {
-		var {classes, atk, mana, hp} = this.props;
+		var {classes, atk, mana, hp, player, dispatch, e, p, whereIs, turn} = this.props;
+		var currentPlayer = player === 'player' ? p : e;
 		var cl = 'Card ';
 		var inner = '';
 		if(classes) {
 			inner = 'innerCard ' + classes;
 			cl += 'cardFrame ';
+			if(currentPlayer.mana >= mana && whereIs === 'Hand') {
+				inner += ' playerActive';
+			}
+			if(turn > 0 && whereIs === 'Forces') {
+				inner += ' playerActive';
+			}
 		}
 		var renderStats = () => {
 			if(inner)
@@ -40,4 +48,11 @@ class Card extends React.Component {
 	}
 }
 
-export default Card;
+export default connect(
+	(state) => {
+		return {
+			p:state.player,
+			e:state.enemy,
+		}
+	}
+)(Card);
