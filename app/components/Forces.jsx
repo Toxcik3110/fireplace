@@ -20,6 +20,7 @@ export class Forces extends React.Component {
 				return (<Card 
 				key={card.id} 
 				{...card}
+				player={player}
 				whereIs={'Forces'}
 				classes={card.classes ? card.classes : ''}
 				onClick={(e) => {

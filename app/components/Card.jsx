@@ -7,18 +7,22 @@ class Card extends React.Component {
 		super(props);
 	}
 	render() {
-		var {classes, atk, mana, hp, player, dispatch, e, p, whereIs, turn} = this.props;
+		var {classes, atk, mana, hp, player, dispatch, e, p, whereIs, turn, playerTurn, baseHp} = this.props;
 		var currentPlayer = player === 'player' ? p : e;
 		var cl = 'Card ';
 		var inner = '';
+		var hpClass = '';
 		if(classes) {
 			inner = 'innerCard ' + classes;
 			cl += 'cardFrame ';
-			if(currentPlayer.mana >= mana && whereIs === 'Hand') {
+			if(currentPlayer.mana >= mana && whereIs === 'Hand' && player === playerTurn) {
 				inner += ' playerActive';
 			}
-			if(turn > 0 && whereIs === 'Forces') {
+			if(turn > 0 && whereIs === 'Forces' && player === playerTurn) {
 				inner += ' playerActive';
+			}
+			if(hp < baseHp) {
+				hpClass = ' debuffText';
 			}
 		}
 		var renderStats = () => {
@@ -28,7 +32,7 @@ class Card extends React.Component {
 					<div className="manaCard">
 						{mana}
 					</div>
-					<div className="hpCard">
+					<div className={'hpCard' + hpClass}>
 						{hp}
 					</div>
 					<div className="atkCard">
@@ -53,6 +57,7 @@ export default connect(
 		return {
 			p:state.player,
 			e:state.enemy,
+			playerTurn:state.turn,
 		}
 	}
 )(Card);

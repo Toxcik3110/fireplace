@@ -11,7 +11,7 @@ export class Hand extends React.Component {
 		super(props);
 	}
 	render() {
-		var {pHand, eHand, dispatch, player, palyerTurn, e, p, pForces, eForces} = this.props;
+		var {pHand, eHand, dispatch, player, playerTurn, e, p, pForces, eForces} = this.props;
 		var hand = player == 'player' ? pHand : eHand;
 		var forces = player == 'player' ? pForces : eForces;
 		var currentPlayer = player == 'player' ? p : e;
@@ -24,7 +24,7 @@ export class Hand extends React.Component {
 				player={player}
 				whereIs={'Hand'}
 				onClick={(e) => {
-					if(card.mana <= currentPlayer.mana && forces.length < 7) {
+					if(card.mana <= currentPlayer.mana && forces.length < 7 && player === playerTurn) {
 						dispatch(actions.placeCard(player, card));
 					}
 				}}

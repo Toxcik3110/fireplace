@@ -6,8 +6,7 @@ var createCard = (classes, mana, hp, atk) => {
 		mana,
 		hp,
 		atk,
-		selected:false,
-		turn:false,
+		turn:0,
 	}
 }
 
