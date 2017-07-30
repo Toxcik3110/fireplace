@@ -4,41 +4,35 @@ class Card extends React.Component {
 
 	constructor(props) {
 		super(props);
-		var cl = '' || this.props.classes;
-		// cl = cl.join(' ')
-		
-		this.state = {
-			classes: cl,
-		}
 	}
 	render() {
-
+		var {classes, atk, mana, hp} = this.props;
 		// var classes = 'Card ' + this.state.classes;
-		var classes = 'Card ';
+		var cl = 'Card ';
 		var inner = '';
-		if(this.state.classes.length > 0) {
+		if(classes) {
 			// classes += 'cardFrame ' + this.state.classes;
-			inner = 'innerCard ' + this.state.classes;
-			classes += 'cardFrame ';
+			inner = 'innerCard ' + classes;
+			cl += 'cardFrame ';
 		}
 		var renderStats = () => {
 			if(inner)
 			return (
 				<div>
 					<div className="manaCard">
-						3
+						{mana}
 					</div>
 					<div className="hpCard">
-						4
+						{hp}
 					</div>
 					<div className="atkCard">
-						5
+						{atk}
 					</div>
 				</div>
 			);
 		}
 		return (
-		<div className={classes}>
+		<div className={cl}>
 			<div className={inner}>
 
 			</div>

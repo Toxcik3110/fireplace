@@ -1,17 +1,26 @@
 import React from 'react';
 import uuid from 'node-uuid';
+import {connect} from 'react-redux';
 
 import Card from 'Card';
 
-class Hand extends React.Component {
+export class Hand extends React.Component {
 
 	constructor(props) {
 		super(props);
 	}
 	render() {
-		var {cards} = this.props;
-		var cardItems = cards.map((card) => {
-			return (<Card key={uuid()} classes={card.classes ? card.classes : ''} />)
+		var {pHand, eHand, dispatch, player, palyerTurn} = this.props;
+		var hand = player == 'player' ? pHand : eHand;
+
+		var cardItems = [];
+		if(hand) cardItems = hand.map((card) => {
+			return (<Card key={uuid()} 
+				mana={card.mana} 
+				atk={card.atk} 
+				hp={card.hp}
+				classes={card.classes ? card.classes : ''} 
+				/>)
 		})
 		return (
 		<div className="Hand">
@@ -23,4 +32,12 @@ class Hand extends React.Component {
 	}
 }
 
-export default Hand;
+export default connect(
+	(state) => {
+		return {
+			pHand:state.playerHand,
+			eHand:state.enemyHand,
+			playerTurn:state.turn,
+		}
+	}
+)(Hand);

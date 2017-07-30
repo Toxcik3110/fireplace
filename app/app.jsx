@@ -11,6 +11,9 @@ store.subscribe(() => {
 	console.log('New state', state);
 });
 
+store.dispatch(actions.generateDeck('player'));
+store.dispatch(actions.generateDeck('enemy'));
+
 //Load foundation
 $(document).foundation();
 
