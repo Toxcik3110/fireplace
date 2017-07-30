@@ -30,7 +30,7 @@ function generateCard() {
 }
 
 
-var initialPlayer = {hp:30, maxHp:30, mana:0, maxMana:0,draw:0}
+var initialPlayer = {hp:30, maxHp:30, mana:0, maxMana:0,draw:3}
 
 export var playerReducer = (state = initialPlayer, action) => {
 	switch(action.type) {
@@ -230,6 +230,13 @@ export var turnReducer = (state = 'player', action) => {
 	switch(action.type) {
 		case 'END_TURN':
 			return state === 'player' ? 'enemy' : 'player';
+		default:
+			return state;
+	}
+}
+
+export var userReducer = (state = {}, action) => {
+	switch(action.type) {
 		default:
 			return state;
 	}

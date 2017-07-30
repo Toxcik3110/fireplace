@@ -7,11 +7,9 @@ class Card extends React.Component {
 	}
 	render() {
 		var {classes, atk, mana, hp} = this.props;
-		// var classes = 'Card ' + this.state.classes;
 		var cl = 'Card ';
 		var inner = '';
 		if(classes) {
-			// classes += 'cardFrame ' + this.state.classes;
 			inner = 'innerCard ' + classes;
 			cl += 'cardFrame ';
 		}

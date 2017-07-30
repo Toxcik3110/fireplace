@@ -11,7 +11,8 @@ export var configure = (initialState) => {
 		enemyDeck: reducers.enemyDeckReducer,
 		enemyHand: reducers.enemyHandReducer,
 		enemyForces: reducers.enemyForcesReducer,
-		turn: reducers.turnReducer
+		turn: reducers.turnReducer,
+		user: reducers.userReducer,
 	});
 	var store = redux.createStore(reducer, initialState);
 

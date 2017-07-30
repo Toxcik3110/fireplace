@@ -19,7 +19,7 @@
 	flex-direction:column;
 	align-items:center;
 	justify-content:center;
-	background-color:#5ef;
+	background-color:#9C8E7C;
 }
 
 .CardDeck {
@@ -27,13 +27,15 @@
 	background: $cardback_50;
 	background-size:contain;
 	background-repeat:no-repeat;
-	width: 70%;
+	width: 80%;
 	height: 40%;
 	// margin: 0px 20px;
 }
 
 .Turn {
 	flex:1;
+	display:flex;
+	align-items:center;
 	// padding: 20px;
 	text-align:center;
 }
@@ -183,3 +185,23 @@
 .cardGap {
 			flex:1;
 		}
+
+.playerActive {
+	border:3px solid #0f0;
+}
+
+.enemyActive {
+	border:3px solid #f00;
+}
+
+.playerText {
+	color:#0f0;
+	font-weight:bold;
+	font-size:2rem;
+}
+
+.enemyText {
+	color:#f00;
+	font-weight:bold;
+	font-size:2rem;
+}

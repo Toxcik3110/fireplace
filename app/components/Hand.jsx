@@ -11,8 +11,9 @@ export class Hand extends React.Component {
 		super(props);
 	}
 	render() {
-		var {pHand, eHand, dispatch, player, palyerTurn, e, p} = this.props;
+		var {pHand, eHand, dispatch, player, palyerTurn, e, p, pForces, eForces} = this.props;
 		var hand = player == 'player' ? pHand : eHand;
+		var forces = player == 'player' ? pForces : eForces;
 		var currentPlayer = player == 'player' ? p : e;
 		var cardItems = [];
 		if(hand) cardItems = hand.map((card) => {
@@ -22,7 +23,7 @@ export class Hand extends React.Component {
 				hp={card.hp}
 				classes={card.classes ? card.classes : ''} 
 				onClick={(e) => {
-					if(card.mana <= currentPlayer.mana) {
+					if(card.mana <= currentPlayer.mana && forces.length < 7) {
 						dispatch(actions.placeCard(player, card));
 					}
 				}}
@@ -46,6 +47,8 @@ export default connect(
 			p:state.player,
 			e:state.enemy,
 			playerTurn:state.turn,
+			pForces:state.playerForces,
+			eForces:state.enemyForces,
 		}
 	}
 )(Hand);

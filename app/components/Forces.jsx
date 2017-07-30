@@ -10,21 +10,25 @@ export class Forces extends React.Component {
 		super(props);
 	}
 	render() {
-		var {player, eForces, pForces, playerTurn, dispatch} = this.props;
+		var {player, eForces, pForces, playerTurn, dispatch, p, e} = this.props;
 		var car = <h1>'ERROR'</h1>;
 		var forces = player == 'player' ? pForces : eForces;
+		var currentPlayer = player == 'player' ? p : e;
 		if (forces) {
 			car = forces.map((card) => {
 				return (<Card key={uuid()} 
 				mana={card.mana} 
 				atk={card.atk} 
 				hp={card.hp}
-				classes={card.classes ? card.classes : ''} 
+				classes={card.classes ? card.classes : ''}
+				onClick={(e) => {
+					alert(player)
+				}} 
 				/>)
 			});
 		}
 		return (
-		<div className="forces" id={player}>
+		<div className="forces">
 			<div className="cardGap"></div>
 			{car}
 			<div className="cardGap"></div>
@@ -39,6 +43,8 @@ export default connect(
 			pForces:state.playerForces,
 			eForces:state.enemyForces,
 			playerTurn:state.turn,
+			p:state.player,
+			e:state.enemy,
 		}
 	}
 )(Forces);
