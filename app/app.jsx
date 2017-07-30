@@ -6,7 +6,6 @@ import MainApp from 'MainApp';
 import * as actions from 'actions';
 
 var store = require('configureStore').configure();
-
 store.subscribe(() => {
 	var state = store.getState();
 	console.log('New state', state);

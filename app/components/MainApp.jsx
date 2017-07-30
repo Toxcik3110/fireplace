@@ -13,9 +13,10 @@ class MainApp extends React.Component {
 		return (
 			<div className="wrapper">
 				<div className="left">
-					<Player player='player2' mana={0} maxMana={9} hp={10}/>
+					<Player cards={[{},{},{}]} player='enemy' mana={0} maxMana={9} hp={10}/>
 					<Field />
-					<Player player='player1' mana={5} maxMana={10} hp={15}/>
+					<Player cards={[{classes:'card1'},{classes:'card2'},{classes:'card3'}]} 
+					player='player' mana={5} maxMana={10} hp={15}/>
 				</div>
 				<Decks />
 			</div>
