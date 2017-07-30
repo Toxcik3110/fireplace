@@ -15,20 +15,22 @@ export class Decks extends React.Component {
 		var currentPlayer = player == 'player' ? p : e;
 		var turnText = player === 'player' ? 'Your turn' : 'Enemy turn';
 		// var activeClass = 'CardDeck ';
-		var playerClass = 'CardDeck playerActive';
-		var enemyClass = 'CardDeck enemyActive';
-		var neutralClass = 'CardDeck';
+		var playerClass = 'playerActive';
+		var enemyClass = 'enemyActive';
+		var neutralClass = '';
 
 		var renderDeck = (playerSide) => {
 			var chosenClass = playerSide == 'player' ? playerClass : enemyClass;
-			var turnClass = playerSide == player ? chosenClass : neutralClass; 
+			var turnClass = playerSide == player ? chosenClass : neutralClass;
+			if(currentPlayer.draw == 0) turnClass = '';
 			return (
-				<div className={turnClass} onClick={(e) => {
+				<div className='CardDeck' onClick={(e) => {
 					if(currentPlayer.draw > 0 && playerSide == player && hand.length < 6) {
 						var r = Math.floor(Math.random() * deck.length);
 						dispatch(actions.getCard(player, deck[r]));
 					}}
 				}>
+					<div className={'innerDeck ' + turnClass}> </div>
 				</div>
 			);
 		}
@@ -40,7 +42,7 @@ export class Decks extends React.Component {
 			</div>
 			{renderDeck('enemy')}
 			<div className="Turn">
-				<button className="Player" id={player} onClick={(e) => {
+				<button className="Player componentActive" id={player} onClick={(e) => {
 					dispatch(actions.endTurn(player))
 				}}>{turnText}</button>
 			</div>

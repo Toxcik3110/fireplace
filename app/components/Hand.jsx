@@ -17,7 +17,8 @@ export class Hand extends React.Component {
 		var currentPlayer = player == 'player' ? p : e;
 		var cardItems = [];
 		if(hand) cardItems = hand.map((card) => {
-			return (<Card key={uuid()} 
+			return (<Card 
+				key={card.id} 
 				mana={card.mana} 
 				atk={card.atk} 
 				hp={card.hp}

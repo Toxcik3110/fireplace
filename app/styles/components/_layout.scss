@@ -29,6 +29,9 @@
 	background-repeat:no-repeat;
 	width: 80%;
 	height: 40%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
 	// margin: 0px 20px;
 }
 
@@ -187,11 +190,21 @@
 		}
 
 .playerActive {
-	border:3px solid #0f0;
+	box-shadow: 0px 0px 20px 10px green;
+}
+
+.componentActive {
+	box-shadow: 0px 0px 10px 5px green;
 }
 
 .enemyActive {
-	border:3px solid #f00;
+	box-shadow: 0px 0px 20px 10px red;
+}
+
+.innerDeck {
+	// flex:1;
+	width:94%;
+	height:98%;
 }
 
 .playerText {

@@ -16,13 +16,14 @@ export class Forces extends React.Component {
 		var currentPlayer = player == 'player' ? p : e;
 		if (forces) {
 			car = forces.map((card) => {
-				return (<Card key={uuid()} 
+				return (<Card 
+				key={card.id} 
 				mana={card.mana} 
 				atk={card.atk} 
 				hp={card.hp}
 				classes={card.classes ? card.classes : ''}
 				onClick={(e) => {
-					alert(player)
+					// alert(player)
 				}} 
 				/>)
 			});
