@@ -20,3 +20,11 @@ export var getCard = (player, card) => {
 		card,
 	}
 }
+
+export var placeCard = (player, card) => {
+	return {
+		type:'PLACE_CARD',
+		player,
+		card,
+	}
+}

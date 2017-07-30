@@ -32,7 +32,7 @@ class Card extends React.Component {
 			);
 		}
 		return (
-		<div className={cl}>
+		<div className={cl} onClick={this.props.onClick}>
 			<div className={inner}>
 
 			</div>

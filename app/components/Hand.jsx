@@ -3,6 +3,7 @@ import uuid from 'node-uuid';
 import {connect} from 'react-redux';
 
 import Card from 'Card';
+import * as actions from 'actions';
 
 export class Hand extends React.Component {
 
@@ -10,9 +11,9 @@ export class Hand extends React.Component {
 		super(props);
 	}
 	render() {
-		var {pHand, eHand, dispatch, player, palyerTurn} = this.props;
+		var {pHand, eHand, dispatch, player, palyerTurn, e, p} = this.props;
 		var hand = player == 'player' ? pHand : eHand;
-
+		var currentPlayer = player == 'player' ? p : e;
 		var cardItems = [];
 		if(hand) cardItems = hand.map((card) => {
 			return (<Card key={uuid()} 
@@ -20,6 +21,11 @@ export class Hand extends React.Component {
 				atk={card.atk} 
 				hp={card.hp}
 				classes={card.classes ? card.classes : ''} 
+				onClick={(e) => {
+					if(card.mana <= currentPlayer.mana) {
+						dispatch(actions.placeCard(player, card));
+					}
+				}}
 				/>)
 		})
 		return (
@@ -37,6 +43,8 @@ export default connect(
 		return {
 			pHand:state.playerHand,
 			eHand:state.enemyHand,
+			p:state.player,
+			e:state.enemy,
 			playerTurn:state.turn,
 		}
 	}

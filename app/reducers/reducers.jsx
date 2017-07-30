@@ -113,7 +113,7 @@ export var playerHandReducer = (state = [], action) => {
 	}
 }
 
-export var playerForcesReducer = (state = {}, action) => {
+export var playerForcesReducer = (state = [], action) => {
 	switch(action.type) {
 		case 'PLACE_CARD':
 			if(action.player == 'player') {
@@ -210,7 +210,7 @@ export var enemyHandReducer = (state = [], action) => {
 	}
 }
 
-export var enemyForcesReducer = (state = {}, action) => {
+export var enemyForcesReducer = (state = [], action) => {
 	switch(action.type) {
 		case 'PLACE_CARD':
 			if(action.player == 'enemy') {
