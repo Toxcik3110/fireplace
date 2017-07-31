@@ -24,7 +24,6 @@ export class Forces extends React.Component {
 				whereIs={'Forces'}
 				classes={card.classes ? card.classes : ''}
 				onClick={(e) => {
-					console.log(card)
 					if(user.selectedCard && playerTurn !== player) {
 						dispatch(actions.attackCard(user.selectedCard, card));
 					} else if (!user.selectedCard && playerTurn === player && card.turn > 0) {

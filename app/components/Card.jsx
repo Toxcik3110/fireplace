@@ -7,7 +7,7 @@ class Card extends React.Component {
 		super(props);
 	}
 	render() {
-		var {classes, atk, mana, hp, player, dispatch, e, p, whereIs, turn, playerTurn, baseHp} = this.props;
+		var {id, classes, atk, mana, hp, player, dispatch, e, p, whereIs, turn, playerTurn, baseHp} = this.props;
 		var currentPlayer = player === 'player' ? p : e;
 		var cl = 'Card ';
 		var inner = '';

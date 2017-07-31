@@ -45,6 +45,14 @@ export var attackCard = (playerCard, enemyCard) => {
 	}
 }
 
+export var attackPlayer = (player, card) => {
+	return {
+		type:'ATTACK_PLAYER',
+		player,
+		card,
+	}
+}
+
 export var deselectCard = () => {
 	return {
 		type:'DESELECT_CARD',

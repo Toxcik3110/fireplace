@@ -3,6 +3,7 @@ import uuid from 'node-uuid';
 import {connect} from 'react-redux';
 
 import Hand from 'Hand';
+import * as actions from 'actions';
 
 export class Player extends React.Component {
 
@@ -10,12 +11,16 @@ export class Player extends React.Component {
 		super(props);
 	}
 	render() {
-		var {player, ePlayer, pPlayer} = this.props;
+		var {player, ePlayer, pPlayer, playerTurn, user, dispatch} = this.props;
 		var currentPlayer = player == 'player' ? pPlayer : ePlayer;
 		return (
 		<div className="player">
 			<Hand player={player}/>
-			<div className="ManaHp" id={player}>
+			<div className="ManaHp" id={player} onClick={(e) => {
+				if(user.selectedCard && player !== playerTurn) {
+					dispatch(actions.attackPlayer(player, user.selectedCard));
+				}
+			}} >
 				<div className="hp">
 					<div className="progressWrapper">
 						<div className="cardGap"></div>
@@ -51,6 +56,8 @@ export default connect(
 		return {
 			pPlayer:state.player,
 			ePlayer:state.enemy,
+			user:state.user,
+			playerTurn:state.turn,
 		}
 	}
 )(Player);
