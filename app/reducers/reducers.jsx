@@ -1,4 +1,5 @@
 import uuid from 'node-uuid';
+import * as DeckAPI from 'DeckAPI';
 
 var createCard = (classes, mana, hp, atk) => {
 	return {
@@ -52,7 +53,7 @@ function generateCard() {
 	var r = Math.floor(Math.random()*collection.length);
 	baseId++;
 	return {
-		id: baseId-1,
+		id: uuid(),
 		...collection[r]
 	}
 }
@@ -437,6 +438,23 @@ export var modalReducer = (state = {show:false,data:undefined}, action) => {
 				...state,
 				show:!state.show,
 			}
+		default:
+			return state;
+	}
+}
+
+export var deckReducer = (state = [], action) => {
+	switch(action.type) {
+		case 'GET_DECKS':
+			return DeckAPI.getDecks();
+		case 'ADD_DECK':
+			return DeckAPI.addDeck(action.deck);
+		case 'SEARCH_DECK':
+			return DeckAPI.searchDeck(state, action.id);
+		case 'REMOVE_DECK':
+			return DeckAPI.removeDeck(state, action.id);
+		case 'REMOVE_ALL_DECK':
+			return DeckAPI.removeAllDecks();
 		default:
 			return state;
 	}

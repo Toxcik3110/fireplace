@@ -2,7 +2,7 @@ import React from 'react';
 
 import Field from 'Field';
 import Player from 'Player';
-import Decks from 'Decks';
+import Deck from 'Deck';
 import ToolTip from 'ToolTip';
 import Modal from 'Modal';
 
@@ -19,7 +19,7 @@ class Battle extends React.Component {
 					<Field />
 					<Player	player='player'/>
 				</div>
-				<Decks />
+				<Deck />
 				<ToolTip />
 				<Modal />
 			</div>

@@ -113,3 +113,36 @@ export var toggleModal = () => {
 		type:'TOGGLE_MODAL',
 	}
 }
+
+export var getDecks = () => {
+	return {
+		type:'GET_DECKS',
+	}
+}
+
+export var addDeck = (deck) => {
+	return {
+		type:'ADD_DECK',
+		deck,
+	}
+}
+
+export var searchDeck = (id) => {
+	return {
+		type:'SEARCH_DECK',
+		id,
+	}
+}
+
+export var removeDeck = (id) => {
+	return {
+		type:'REMOVE_DECK',
+		id,
+	}
+}
+
+export var removeDeck = () => {
+	return {
+		type:'REMOVE_ALL_DECKS'
+	}
+}

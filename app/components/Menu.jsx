@@ -2,24 +2,16 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 // import {Button} from 'elemental';
 
+import * as DeckAPI from 'DeckAPI';
+
 class Menu extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			modalIsOpen:false,
-		}
-		this.toggleModal = this.toggleModal.bind(this);
-	}
-
-	toggleModal() {
-		this.setState({
-			modalIsOpen:!this.state.modalIsOpen,
-		});
-		return this.state.modalIsOpen;
 	}
 
 	render() {
+		var decks = DeckAPI.getDecks();
 		return (
 			<div className="gameMenu cardFlex centerFlex fullWidth fullHeight">
 				<div className="cardGap"></div>
@@ -30,7 +22,7 @@ class Menu extends React.Component {
 					<div className='cardFlex cardGap centerFlex width100'><h3>Main menu</h3></div>
 					<div className="menu cardFlex columnOrder alignCenter cardGap3 width100">
 						<li><NavLink to="/battle" activeClassName="active-link" activeStyle={{fontWeight: 'bold'}}>Battle</NavLink></li>
-						<li><NavLink to="/about" activeClassName="active-link" activeStyle={{fontWeight: 'bold'}}>About</NavLink></li>
+						<li><NavLink to="/decks" activeClassName="active-link" activeStyle={{fontWeight: 'bold'}}>Decks[{decks.length}]</NavLink></li>
 						<li><NavLink to="/repo" activeClassName="active-link" activeStyle={{fontWeight: 'bold'}}>Repository</NavLink></li>
 					</div>
 				</div>

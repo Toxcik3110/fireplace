@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import Menu from 'Menu';
 import Battle from 'Battle';
+import Decks from 'Decks';
 
 class MainApp extends React.Component {
 
@@ -15,6 +16,7 @@ class MainApp extends React.Component {
 				<div>
 					<Route exact path='/' component={Menu} />
 					<Route path='/battle' component={Battle} />
+					<Route path='/decks' component={Decks} />
 				</div>
 			</Router>
 		);
