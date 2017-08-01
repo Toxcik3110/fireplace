@@ -58,3 +58,39 @@ export var deselectCard = () => {
 		type:'DESELECT_CARD',
 	}
 }
+
+export var tooltipShow = () => {
+	return {
+		type:'TOOLTIP_SHOW',
+	}
+}
+
+export var tooltipHide = () => {
+	return {
+		type:'TOOLTIP_HIDE',
+	}
+}
+
+export var toggleTooltip = () => {
+	return {
+		type:'TOGGLE_TOOLTIP',
+	}
+}
+
+export var mouseMove = (x,y) => {
+	return {
+		type:'MOUSE_MOVE',
+		x,
+		y,
+	}
+}
+
+export var captureMouse = (top,left,width,height) => {
+	return {
+		type:'CAPTURE_MOUSE',
+		top,
+		left,
+		width,
+		height,
+	}
+}

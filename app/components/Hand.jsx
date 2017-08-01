@@ -30,6 +30,17 @@ export class Hand extends React.Component {
 						dispatch(actions.placeCard(player, card));
 					}
 				}}
+				onMouseEnter={(e) => {
+					dispatch(actions.tooltipShow());
+					var rect = e.target.getBoundingClientRect();
+					dispatch(actions.captureMouse(rect.top,rect.left,rect.width,rect.height))
+				}}
+				onMouseLeave={(e) => {
+					dispatch(actions.tooltipHide());
+				}}
+				onMouseMove={(e) => {
+					// dispatch(actions.mouseMove(e.pageX, e.pageY))
+				}}
 				/>)
 		})
 		return (

@@ -26,14 +26,26 @@ export class Forces extends React.Component {
 				whereIs={'Forces'}
 				classes={card.classes ? card.classes : ''}
 				onClick={(e) => {
+					var cond = !user.selectedCard && (playerTurn === player) && (card.turn > 0);
 					if(user.selectedCard && playerTurn !== player) {
 						dispatch(actions.attackCard(user.selectedCard, card));
-					} else if (!user.selectedCard && playerTurn === player && card.turn > 0) {
+					} else if (cond) {
 						dispatch(actions.selectCard(player, card));
 					} else if (user.selectedCard === card) {
 						dispatch(actions.deselectCard());
 					}
-				}} 
+				}}
+				onMouseEnter={(e) => {
+					dispatch(actions.tooltipShow());
+					var rect = e.target.getBoundingClientRect();
+					dispatch(actions.captureMouse(rect.top,rect.left,rect.width,rect.height))
+				}}
+				onMouseLeave={(e) => {
+					dispatch(actions.tooltipHide());
+				}}
+				onMouseMove={(e) => {
+					// dispatch(actions.mouseMove(e.pageX, e.pageY))
+				}}
 				/>)
 			});
 		}

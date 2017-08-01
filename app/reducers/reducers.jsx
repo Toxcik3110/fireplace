@@ -375,3 +375,46 @@ export var userReducer = (state = {selectedCard:undefined}, action) => {
 			return state;
 	}
 }
+
+export var tooltipReducer = (state = {x:0,
+									y:0,
+									show:false,
+									left:0,
+									width:0,
+									top:0,
+									height:0,
+									}, action) => {
+	switch(action.type) {
+		case 'TOOLTIP_SHOW':
+			return {
+				...state,
+				show:true,
+			}
+		case 'TOOLTIP_HIDE':
+			return {
+				...state,
+				show:false,
+			}
+		case 'TOGGLE_TOOLTIP':
+			return {
+				...state,
+				show:!state.show,
+			}
+		case 'MOUSE_MOVE':
+			return {
+				...state,
+				x:action.x,
+				y:action.y,
+			}
+		case 'CAPTURE_MOUSE':
+			return {
+				...state,
+				left:action.left,
+				width:action.width,
+				height:action.height,
+				top:action.top,
+			}
+		default:
+			return state;
+	}
+}

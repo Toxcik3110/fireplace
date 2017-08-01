@@ -41,7 +41,12 @@ class Card extends React.Component {
 			);
 		}
 		return (
-		<div className={cl} onClick={this.props.onClick}>
+		<div className={cl} 
+		onClick={this.props.onClick} 
+		onMouseEnter={this.props.onMouseEnter}
+		onMouseLeave={this.props.onMouseLeave}
+		onMouseMove={this.props.onMouseMove}
+		>
 			<div className={inner}>
 
 			</div>

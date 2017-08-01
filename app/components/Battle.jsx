@@ -3,6 +3,7 @@ import React from 'react';
 import Field from 'Field';
 import Player from 'Player';
 import Decks from 'Decks';
+import ToolTip from 'ToolTip';
 
 class Battle extends React.Component {
 
@@ -18,6 +19,7 @@ class Battle extends React.Component {
 					<Player	player='player'/>
 				</div>
 				<Decks />
+				<ToolTip />
 			</div>
 		);
 	}

@@ -21,6 +21,9 @@ $(document).foundation();
 //APP CSS
 import 'style-loader!css-loader!sass-loader!applicationStyles';
 
+//Elemental UI kit
+// import 'style-loader!css-loader!less-loader!../node_modules/elemental/less/elemental.less'
+
 ReactDOM.render(
 	<Provider store={store}>
 		<MainApp />

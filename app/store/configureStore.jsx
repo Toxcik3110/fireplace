@@ -13,6 +13,7 @@ export var configure = (initialState) => {
 		enemyForces: reducers.enemyForcesReducer,
 		turn: reducers.turnReducer,
 		user: reducers.userReducer,
+		tooltip: reducers.tooltipReducer,
 	});
 	var store = redux.createStore(reducer, initialState);
 
