@@ -94,3 +94,21 @@ export var captureMouse = (top,left,width,height) => {
 		height,
 	}
 }
+
+export var modalShow = () => {
+	return {
+		type:'MODAL_SHOW',
+	}
+}
+
+export var modalHide = () => {
+	return {
+		type:'MODAL_HIDE',
+	}
+}
+
+export var toggleModal = () => {
+	return {
+		type:'TOGGLE_MODAL',
+	}
+}

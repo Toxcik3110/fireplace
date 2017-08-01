@@ -14,6 +14,9 @@ export class Player extends React.Component {
 		var {player, ePlayer, pPlayer, playerTurn, user, dispatch} = this.props;
 		var currentPlayer = player == 'player' ? pPlayer : ePlayer;
 		var enemyPlayer = player == 'player' ? pPlayer : ePlayer;
+		if(currentPlayer.hp <= 0) {
+			dispatch(actions.modalShow());
+		}
 		return (
 		<div className="player">
 			<Hand player={player}/>

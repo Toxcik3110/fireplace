@@ -14,6 +14,7 @@ export var configure = (initialState) => {
 		turn: reducers.turnReducer,
 		user: reducers.userReducer,
 		tooltip: reducers.tooltipReducer,
+		modal: reducers.modalReducer,
 	});
 	var store = redux.createStore(reducer, initialState);
 

@@ -4,6 +4,7 @@ import Field from 'Field';
 import Player from 'Player';
 import Decks from 'Decks';
 import ToolTip from 'ToolTip';
+import Modal from 'Modal';
 
 class Battle extends React.Component {
 
@@ -20,6 +21,7 @@ class Battle extends React.Component {
 				</div>
 				<Decks />
 				<ToolTip />
+				<Modal />
 			</div>
 		);
 	}
