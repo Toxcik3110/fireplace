@@ -22,6 +22,8 @@ export class Hand extends React.Component {
 				{...card}
 				classes={card.classes ? card.classes : ''}
 				player={player}
+				currentPlayer={currentPlayer}
+				playerTurn={playerTurn}
 				whereIs={'Hand'}
 				onClick={(e) => {
 					if(card.mana <= currentPlayer.mana && forces.length < 7 && player === playerTurn) {

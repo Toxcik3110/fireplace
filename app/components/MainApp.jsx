@@ -1,8 +1,8 @@
 import React from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import Field from 'Field';
-import Player from 'Player';
-import Decks from 'Decks';
+import Menu from 'Menu';
+import Battle from 'Battle';
 
 class MainApp extends React.Component {
 
@@ -11,14 +11,12 @@ class MainApp extends React.Component {
 	}
 	render() {
 		return (
-			<div className="wrapper">
-				<div className="left">
-					<Player player='enemy'/>
-					<Field />
-					<Player	player='player'/>
+			<Router>
+				<div>
+					<Route exact path='/' component={Menu} />
+					<Route path='/battle' component={Battle} />
 				</div>
-				<Decks />
-			</div>
+			</Router>
 		);
 	}
 }

@@ -13,11 +13,12 @@ export class Player extends React.Component {
 	render() {
 		var {player, ePlayer, pPlayer, playerTurn, user, dispatch} = this.props;
 		var currentPlayer = player == 'player' ? pPlayer : ePlayer;
+		var enemyPlayer = player == 'player' ? pPlayer : ePlayer;
 		return (
 		<div className="player">
 			<Hand player={player}/>
 			<div className="ManaHp" id={player} onClick={(e) => {
-				if(user.selectedCard && player !== playerTurn) {
+				if(user.selectedCard && player !== playerTurn && enemyPlayer.hp > 0) {
 					dispatch(actions.attackPlayer(player, user.selectedCard));
 				}
 			}} >

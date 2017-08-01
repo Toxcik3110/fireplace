@@ -7,8 +7,7 @@ class Card extends React.Component {
 		super(props);
 	}
 	render() {
-		var {id, classes, atk, mana, hp, player, dispatch, e, p, whereIs, turn, playerTurn, baseHp} = this.props;
-		var currentPlayer = player === 'player' ? p : e;
+		var {id, classes, atk, mana, hp, player, currentPlayer, whereIs, turn, playerTurn, baseHp} = this.props;
 		var cl = 'Card ';
 		var inner = '';
 		var hpClass = '';
@@ -52,12 +51,4 @@ class Card extends React.Component {
 	}
 }
 
-export default connect(
-	(state) => {
-		return {
-			p:state.player,
-			e:state.enemy,
-			playerTurn:state.turn,
-		}
-	}
-)(Card);
+export default Card;
