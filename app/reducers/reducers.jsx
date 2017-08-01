@@ -58,7 +58,7 @@ function generateCard() {
 }
 
 
-var initialPlayer = {hp:3, maxHp:3, mana:0, maxMana:0,draw:3}
+var initialPlayer = {hp:30, maxHp:30, mana:0, maxMana:0,draw:3}
 
 export var playerReducer = (state = initialPlayer, action) => {
 	switch(action.type) {
@@ -419,7 +419,7 @@ export var tooltipReducer = (state = {x:0,
 	}
 }
 
-export var modalReducer = (state = {show:true}, action) => {
+export var modalReducer = (state = {show:false}, action) => {
 	switch(action.type) {
 		case 'MODAL_SHOW':
 			return {

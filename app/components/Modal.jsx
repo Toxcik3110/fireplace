@@ -11,15 +11,15 @@ export class Modal extends React.Component {
 		// var {tooltip} = this.props;
 		var {modal, dispatch} = this.props;
 		var style = modal.show ? {'zIndex':5} : {'zIndex':0};
-		// style = {
-		// 	...style,
-		// 	top:tooltip.top,
-		// 	height:tooltip.height,
-		// 	left:tooltip.left + tooltip.width + 20,
-		// 	backgroundColor:'rgba(0,0,0,0.5)',
-		// }
+		style = {
+			...style,
+			// top:tooltip.top,
+			// height:tooltip.height,
+			// left:tooltip.left + tooltip.width + 20,
+			backgroundColor:'rgba(0,0,0,0.8)',
+		}
 		return (
-			<div className="cardToolTip cardFlex fullWidth fullHeight" style={style}>
+			<div className="cardModal cardFlex fullWidth fullHeight" style={style}>
 				<div className="cardGap"></div>
 				<div className="cardGap2 cardFlex columnOrder">
 					<div className="cardGap"></div>
