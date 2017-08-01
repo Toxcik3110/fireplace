@@ -141,7 +141,7 @@ export var removeDeck = (id) => {
 	}
 }
 
-export var removeDeck = () => {
+export var removeAllDecks = () => {
 	return {
 		type:'REMOVE_ALL_DECKS'
 	}
