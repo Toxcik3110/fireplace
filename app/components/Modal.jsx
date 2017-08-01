@@ -18,12 +18,8 @@ export class Modal extends React.Component {
 			// left:tooltip.left + tooltip.width + 20,
 			backgroundColor:'rgba(0,0,0,0.8)',
 		}
-		return (
-			<div className="cardModal cardFlex fullWidth fullHeight" style={style}>
-				<div className="cardGap"></div>
-				<div className="cardGap2 cardFlex columnOrder">
-					<div className="cardGap"></div>
-					<div className="cardGap2 cardFlex columnOrder">
+		var renderData = () => {
+			return (<div className="cardGap2 cardFlex columnOrder">
 						<div className="cardGap">
 							<h1 className='page-title'>
 								GAME OVER
@@ -36,7 +32,26 @@ export class Modal extends React.Component {
 								<button className='button hollow expanded'>Exit game</button>
 							</NavLink>
 						</div>
-					</div>
+					</div>);
+		}
+		if(modal.data !== undefined) {
+			renderData = () => {
+				return (<div className="cardGap2 cardFlex columnOrder">
+							<div className="cardGap">
+								{modal.data.header()}
+							</div>
+							<div className="cardGap cardFlex centerFlex">
+								{modal.data.body()}
+							</div>
+						</div>)
+			}
+		}
+		return (
+			<div className="cardModal cardFlex fullWidth fullHeight" style={style}>
+				<div className="cardGap"></div>
+				<div className="cardGap2 cardFlex columnOrder">
+					<div className="cardGap"></div>
+					{renderData()}
 					<div className="cardGap"></div>
 				</div>
 				<div className="cardGap"></div>

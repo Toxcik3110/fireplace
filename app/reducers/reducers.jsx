@@ -419,12 +419,13 @@ export var tooltipReducer = (state = {x:0,
 	}
 }
 
-export var modalReducer = (state = {show:false}, action) => {
+export var modalReducer = (state = {show:false,data:undefined}, action) => {
 	switch(action.type) {
 		case 'MODAL_SHOW':
 			return {
 				...state,
 				show:true,
+				data:action.data,
 			}
 		case 'MODAL_HIDE':
 			return {

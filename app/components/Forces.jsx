@@ -1,6 +1,7 @@
 import React from 'react';
 import uuid from 'node-uuid';
 import {connect} from 'react-redux';
+import {NavLink} from 'react-router-dom';
 
 import * as actions from 'actions';
 import Card from 'Card';
@@ -50,7 +51,33 @@ export class Forces extends React.Component {
 			});
 		}
 		return (
-		<div className="forces">
+		<div className="forces" onContextMenu={(e) => {
+					e.preventDefault();
+					var data = {
+						header: ()=>{
+							return (<div>
+									<h1 className='page-title'>
+										MENU
+									</h1>
+								</div>);
+						},
+						body: ()=>{
+							return (<div>
+										<NavLink to='/' onClick={(e) => {
+											dispatch(actions.modalHide());
+										}} >
+											<button className='button hollow expanded'>Exit to MainMenu</button>
+										</NavLink>
+										<NavLink to='/battle' onClick={(e) => {
+											dispatch(actions.modalHide());
+										}} >
+											<button className='button hollow expanded'>Return to game</button>
+										</NavLink>
+									</div>);
+						},
+					}
+					dispatch(actions.modalShow(data));
+				}}>
 			<div className="cardGap"></div>
 			{car}
 			<div className="cardGap"></div>

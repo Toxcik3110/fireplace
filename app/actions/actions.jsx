@@ -95,9 +95,10 @@ export var captureMouse = (top,left,width,height) => {
 	}
 }
 
-export var modalShow = () => {
+export var modalShow = (data) => {
 	return {
 		type:'MODAL_SHOW',
+		data,
 	}
 }
 
