@@ -12,6 +12,23 @@ class Menu extends React.Component {
 
 	render() {
 		var decks = DeckAPI.getDecks();
+		var renderBattle = () => {
+			if(decks.length > 0)
+			{
+				return (<li>
+							<NavLink to="/battle" 
+							activeClassName="active-link" 
+							activeStyle={{fontWeight: 'bold'}}>
+							Battle</NavLink></li>)
+			} else {
+				return (<li>
+					<NavLink to="/" style={{color:'red'}} 
+					onClick={(e) => {
+						alert('Not enough decks to play! Create some in "Decks" menu!')
+					}}>Battle</NavLink>
+					</li>)
+			}
+		}
 		return (
 			<div className="gameMenu cardFlex centerFlex fullWidth fullHeight">
 				<div className="cardGap"></div>
@@ -21,9 +38,21 @@ class Menu extends React.Component {
 					</div>
 					<div className='cardFlex cardGap centerFlex width100'><h3>Main menu</h3></div>
 					<div className="menu cardFlex columnOrder alignCenter cardGap3 width100">
-						<li><NavLink to="/battle" activeClassName="active-link" activeStyle={{fontWeight: 'bold'}}>Battle</NavLink></li>
-						<li><NavLink to="/decks" activeClassName="active-link" activeStyle={{fontWeight: 'bold'}}>Decks[{decks.length}]</NavLink></li>
-						<li><NavLink to="/repo" activeClassName="active-link" activeStyle={{fontWeight: 'bold'}}>Repository</NavLink></li>
+						{renderBattle()}
+						<li>
+							<NavLink to="/decks" 
+							activeClassName="active-link" 
+							activeStyle={{fontWeight: 'bold'}}>
+								Decks[{decks.length}]
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to="/repo" 
+							activeClassName="active-link" 
+							activeStyle={{fontWeight: 'bold'}}>
+								Repository
+							</NavLink>
+						</li>
 					</div>
 				</div>
 				<div className="cardGap"></div>
