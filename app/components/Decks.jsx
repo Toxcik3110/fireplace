@@ -37,9 +37,11 @@ export class Decks extends React.Component {
 
 		var renderGrid = () => {
 			if(decks.length !== 0) {
+				console.log(decks);
 				var newdecks = [];
 				var newStart = start % decks.length;
-				for(var i = newStart; i < newStart + gridSize; i++) {
+				var limit = decks.length < gridSize ? decks.length : (newStart + gridSize);
+				for(var i = newStart; i < limit; i++) {
 					if(i < 0) {
 						newdecks.push(decks[i + decks.length]);
 					} else if(i > (decks.length - 1)) {
@@ -51,8 +53,11 @@ export class Decks extends React.Component {
 				console.log(newdecks);
 
 				return (<div className="cardGap cardGrid cardGrid2x3">
-					{newdecks.map((elem) => {
-						return (<div key={uuid()} className='justifySelfCenter alignSelfCenter'>{elem}</div>)
+					{newdecks.map((deck) => {
+						return (
+							<div key={uuid()} className='justifySelfCenter alignSelfCenter'>
+								<button className='button large success expanded hollow'>{deck.name}</button>
+							</div>)
 					})}
 				</div>);
 

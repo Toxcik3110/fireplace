@@ -3,16 +3,18 @@ var $ = require('jquery');
 export var addDeck = (deck) => {
 	var stringDecks = localStorage.getItem('decks');
 	var decks = [];
+	console.log(decks)
 	try {
 		decks = JSON.parse(stringDecks);
+		if(!decks) {
+			decks = [];
+		}
 	} catch(e) {
-
+		// console.error('faild')
 	}
-	if($.isArray(deck)) {
-		decks.push(deck);
-		localStorage.setItem('decks', JSON.stringify(decks))
-		return decks;
-	}
+	decks = [...decks, deck];
+	localStorage.setItem('decks', JSON.stringify(decks))
+	return decks;
 }
 
 export var getDecks = () => {

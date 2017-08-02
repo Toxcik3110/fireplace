@@ -4,6 +4,7 @@ import {collection} from 'reducers';
 import uuid from 'node-uuid';
 
 import Card from 'Card';
+import * as DeckAPI from 'DeckAPI';
 
 export class DeckBuilder extends React.Component {
 
@@ -14,6 +15,7 @@ export class DeckBuilder extends React.Component {
 			start: 0,
 			gridSize: 4,
 			sStart: 0,
+			name: '',
 		}
 		this.increaseStart = this.increaseStart.bind(this);
 		this.decreaseStart = this.decreaseStart.bind(this);
@@ -51,16 +53,12 @@ export class DeckBuilder extends React.Component {
 
 	render() {
 		var {deck, start, sStart, gridSize} = this.state;
-		// console.log(this.state);
 		var renderFlex = () => {
 			var that = this;
-			console.log(this.state);
 			if(deck.length !== 0) {
 				var newdeck = [];
-				console.log(deck);
 				var newStart = start % deck.length;
 				var limit = deck.length < gridSize ? deck.length : (newStart + gridSize);
-				console.log(limit);
 				for(var i = newStart; i < limit; i++) {
 					if(i < 0) {
 						newdeck = [...newdeck, deck[i + deck.length]]
@@ -70,7 +68,6 @@ export class DeckBuilder extends React.Component {
 						newdeck = [...newdeck, deck[i]];
 					}
 				}
-				console.log(newdeck);
 
 				return (newdeck.map((card) => {
 						if(card)
@@ -94,7 +91,6 @@ export class DeckBuilder extends React.Component {
 							onMouseMove={(e) => {
 							}}/>)
 					}));
-
 			} else {
 				return (<div className="cardGap cardFlex centerFlex">
 					<h1>
@@ -157,11 +153,25 @@ export class DeckBuilder extends React.Component {
 					</div>
 					<div className="cardGap"></div>
 					<div className="cardGap5">
-						<input type="text" className='bigInput centerText' placeholder="Deck name..." />
+						<input 
+						type="text" 
+						className='bigInput centerText' 
+						placeholder="Deck name..."
+						value={this.state.name}
+						onChange={(e) => {
+							this.setState({
+								name:e.target.value,
+							})
+						}} />
 					</div>
 					<div className="cardGap"></div>
 					<div className="cardGap">
-						<NavLink to="/decks">
+						<NavLink to="/decks" onClick={(e) => {
+							DeckAPI.addDeck({
+								name:this.state.name,
+								deck:this.state.deck,
+							});
+						}} >
 							<button className='button large success expanded'>
 								Create Deck
 							</button>
