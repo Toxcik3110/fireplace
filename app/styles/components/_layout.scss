@@ -309,3 +309,20 @@
 .textGigantic {
 	font-size: 4rem;
 }
+
+.cardGrid {
+	display:grid;
+}
+
+.cardGrid2x3 {
+	grid-template-columns:1fr 1fr 1fr;
+	grid-template-rows:1fr 1fr;
+}
+
+.justifySelfCenter {
+	justify-self:center;
+}
+
+.alignSelfCenter {
+	align-self:center;
+}

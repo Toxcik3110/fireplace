@@ -45,11 +45,7 @@ class Menu extends React.Component {
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to="/repo" 
-							activeClassName="active-link" 
-							activeStyle={{fontWeight: 'bold'}}>
-								Repository
-							</NavLink>
+							<a href='https://github.com/Toxcik3110/fireplace'>Repository</a>
 						</li>
 					</div>
 				</div>
