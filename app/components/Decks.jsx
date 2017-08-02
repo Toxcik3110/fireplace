@@ -34,30 +34,24 @@ export class Decks extends React.Component {
 
 	render() {
 		var {decks, start, gridSize} = this.state;
-		var elements = [];
-		for (var i = 0; i < 12; i++) {
-			elements.push('Elem' + (i+1));
-		}
-
-
 
 		var renderGrid = () => {
-			if(decks.length == 0) {
-				var newElements = [];
-				var newStart = start % elements.length;
+			if(decks.length !== 0) {
+				var newdecks = [];
+				var newStart = start % decks.length;
 				for(var i = newStart; i < newStart + gridSize; i++) {
 					if(i < 0) {
-						newElements.push(elements[i + elements.length]);
-					} else if(i > (elements.length - 1)) {
-						newElements.push(elements[i - elements.length]);
+						newdecks.push(decks[i + decks.length]);
+					} else if(i > (decks.length - 1)) {
+						newdecks.push(decks[i - decks.length]);
 					} else {
-						newElements.push(elements[i]);
+						newdecks.push(decks[i]);
 					}
 				}
-				console.log(newElements);
+				console.log(newdecks);
 
 				return (<div className="cardGap cardGrid cardGrid2x3">
-					{newElements.map((elem) => {
+					{newdecks.map((elem) => {
 						return (<div key={uuid()} className='justifySelfCenter alignSelfCenter'>{elem}</div>)
 					})}
 				</div>);
@@ -87,6 +81,7 @@ export class Decks extends React.Component {
 							<button 
 							className='button large primary expanded'
 							onClick={this.decreaseStart}
+							disabled={this.state.decks.length < this.state.gridSize}
 							>
 								{'<='}
 							</button>
@@ -104,6 +99,7 @@ export class Decks extends React.Component {
 							<button 
 							className='button large primary expanded'
 							onClick={this.increaseStart}
+							disabled={this.state.decks.length < this.state.gridSize}
 							>
 								{'=>'}
 							</button>

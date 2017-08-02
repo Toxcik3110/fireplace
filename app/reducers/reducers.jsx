@@ -13,7 +13,7 @@ var createCard = (classes, mana, hp, atk) => {
 
 var baseId = 1;
 
-var collection = [
+export var collection = [
 	{
 		classes:'card1',
 		mana: 3,

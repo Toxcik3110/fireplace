@@ -84,7 +84,7 @@
 
 	}
 
-	.Hand .Card, .forces .Card {
+	.Hand .Card, .forces .Card, .cardCollection .Card {
 		width:11vw;
 		height:100%;
 		// z-index:0;
@@ -101,8 +101,12 @@
 		justify-content: space-between;
 	}
 
-	.Hand .Card .cardBack, .forces .Card .cardBack {
+	.Hand .Card .cardBack, .forces .Card .cardBack, .cardCollection .Card .cardBack {
 		background-image: $cardback_50;
+	}
+
+	.cardCollection .Card {
+		
 	}
 
 	.Hand .Card {
@@ -212,6 +216,10 @@
 
 .width100 {
 	width:100%;
+}
+
+.height100 {
+	height:100%;
 }
 
 .width20 {
@@ -325,4 +333,13 @@
 
 .alignSelfCenter {
 	align-self:center;
+}
+
+.centerText {
+	text-align:center;
+}
+
+.bigInput {
+	font-size:2rem;
+	padding:1.5rem;
 }

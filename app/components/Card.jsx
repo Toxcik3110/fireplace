@@ -12,14 +12,19 @@ class Card extends React.Component {
 		var hpClass = '';
 		if(classes) {
 			cl += classes;
-			if(currentPlayer.mana >= mana && whereIs === 'Hand' && player === playerTurn) {
-				cl += ' playerActive';
+			if(currentPlayer) {
+				if(currentPlayer.mana >= mana && whereIs === 'Hand' && player === playerTurn) {
+					cl += ' playerActive';
+				}
 			}
 			if(turn > 0 && whereIs === 'Forces' && player === playerTurn) {
 				cl += ' playerActive';
 			}
 			if(hp < baseHp) {
 				hpClass = ' debuffText';
+			}
+			if(whereIs === 'DeckBuilder') {
+
 			}
 		} else {
 			cl += 'cardBack';
@@ -41,11 +46,11 @@ class Card extends React.Component {
 			);
 		}
 		return (
-		<div className={cl} 
-		onClick={this.props.onClick} 
-		onMouseEnter={this.props.onMouseEnter}
-		onMouseLeave={this.props.onMouseLeave}
-		onMouseMove={this.props.onMouseMove}
+		<div className={cl}
+			onClick={this.props.onClick} 
+			onMouseEnter={this.props.onMouseEnter}
+			onMouseLeave={this.props.onMouseLeave}
+			onMouseMove={this.props.onMouseMove}
 		>
 			{renderStats()}
 		</div>
