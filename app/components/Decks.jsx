@@ -1,6 +1,7 @@
 import React from 'react';
 // import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
+import uuid from 'node-uuid';
 
 import * as DeckAPI from 'DeckAPI';
 
@@ -10,20 +11,57 @@ export class Decks extends React.Component {
 		super(props);
 		this.state = {
 			decks: DeckAPI.getDecks(),
+			start: 0,
+			gridSize: 6,
 		}
+		this.increaseStart = this.increaseStart.bind(this);
+		this.decreaseStart = this.decreaseStart.bind(this);
 	}
+
+	increaseStart = (e) => {
+		e.preventDefault();
+		this.setState({
+			start:this.state.start+1,
+		})
+	}
+
+	decreaseStart = (e) => {
+		e.preventDefault();
+		this.setState({
+			start:this.state.start-1,
+		})
+	}
+
 	render() {
-		var {decks} = this.state;
-		var renderDecks = () => {
+		var {decks, start, gridSize} = this.state;
+		var elements = [];
+		for (var i = 0; i < 12; i++) {
+			elements.push('Elem' + (i+1));
+		}
+
+
+
+		var renderGrid = () => {
 			if(decks.length == 0) {
+				var newElements = [];
+				var newStart = start % elements.length;
+				for(var i = newStart; i < newStart + gridSize; i++) {
+					if(i < 0) {
+						newElements.push(elements[i + elements.length]);
+					} else if(i > (elements.length - 1)) {
+						newElements.push(elements[i - elements.length]);
+					} else {
+						newElements.push(elements[i]);
+					}
+				}
+				console.log(newElements);
+
 				return (<div className="cardGap cardGrid cardGrid2x3">
-					<h1 className='justifySelfCenter alignSelfCenter'>Elem1</h1>
-					<h1 className='justifySelfCenter alignSelfCenter'>Elem2</h1>
-					<h1 className='justifySelfCenter alignSelfCenter'>Elem3</h1>
-					<h1 className='justifySelfCenter alignSelfCenter'>Elem4</h1>
-					<h1 className='justifySelfCenter alignSelfCenter'>Elem5</h1>
-					<h1 className='justifySelfCenter alignSelfCenter'>Elem6</h1>
-				</div>)	
+					{newElements.map((elem) => {
+						return (<div key={uuid()} className='justifySelfCenter alignSelfCenter'>{elem}</div>)
+					})}
+				</div>);
+
 			} else {
 				return (<div className="cardGap cardFlex centerFlex">
 					<h1>
@@ -41,12 +79,15 @@ export class Decks extends React.Component {
 					</div>
 					<div className="cardGap3 cardFlex">
 						<div className="cardGap5 callout cardFlex">
-							{renderDecks()}
+							{renderGrid()}
 						</div>
 					</div>
 					<div className="cardGap cardFlex alignCenter">
 						<div className="cardGap">
-							<button className='button large primary expanded'>
+							<button 
+							className='button large primary expanded'
+							onClick={this.decreaseStart}
+							>
 								{'<='}
 							</button>
 						</div>
@@ -60,7 +101,10 @@ export class Decks extends React.Component {
 						</div>
 						<div className="cardGap"></div>
 						<div className="cardGap">
-							<button className='button large primary expanded'>
+							<button 
+							className='button large primary expanded'
+							onClick={this.increaseStart}
+							>
 								{'=>'}
 							</button>
 						</div>
