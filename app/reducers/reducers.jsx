@@ -46,6 +46,28 @@ var collection = [
 		baseAtk: 2,
 		turn:0,
 		baseTurn:1,
+	},
+	{
+		classes:'card4',
+		mana: 2,
+		baseMana: 2,
+		hp: 4,
+		baseHp: 4,
+		atk: 1,
+		baseAtk: 1,
+		turn:0,
+		baseTurn:1,
+	},
+	{
+		classes:'card5',
+		mana: 4,
+		baseMana: 4,
+		hp: 7,
+		baseHp: 7,
+		atk: 2,
+		baseAtk: 2,
+		turn:0,
+		baseTurn:1,
 	}
 ];
 

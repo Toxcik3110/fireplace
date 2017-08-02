@@ -15,7 +15,7 @@ export class Deck extends React.Component {
 		var currentPlayer = player == 'player' ? p : e;
 		var turnText = player === 'player' ? 'Your turn' : 'Enemy turn';
 		// var activeClass = 'CardDeck ';
-		var playerClass = 'playerActive';
+		var playerClass = 'componentActive';
 		var enemyClass = 'enemyActive';
 		var neutralClass = '';
 
@@ -42,7 +42,7 @@ export class Deck extends React.Component {
 			</div>
 			{renderDeck('enemy')}
 			<div className="Turn">
-				<button className="Player componentActive" id={player} onClick={(e) => {
+				<button className="Player playerActive" id={player} onClick={(e) => {
 					dispatch(actions.endTurn(player))
 				}}>{turnText}</button>
 			</div>

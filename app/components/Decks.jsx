@@ -7,18 +7,22 @@ export class Decks extends React.Component {
 		super(props);
 	}
 	render() {
-		// var {tooltip} = this.props;
-		// var style = tooltip.show ? {'zIndex':3} : {'zIndex':0};
-		// style = {
-		// 	...style,
-		// 	top:tooltip.top,
-		// 	height:tooltip.height,
-		// 	left:tooltip.left + tooltip.width + 20,
-		// 	backgroundColor:'rgba(0,0,0,0.5)',
-		// }
 		return (
-			<div className="">
-				decks here
+			<div class="cardFlex fullWidth fullHeight">
+				<div class="cardGap"></div>
+				<div class="cardGap cardFlex columnOrder">
+					<div class="cardGap"></div>
+					<div class="cardGap5 cardFlex">
+						<div class="cardFlex centerFlex">
+							<h1 class="page-title">Your decks</h1>
+						</div>
+						<div class="">
+							
+						</div>
+					</div>
+					<div class="cardGap"></div>
+				</div>
+				<div class="cardGap"></div>
 			</div>
 		);
 	}

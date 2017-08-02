@@ -13,12 +13,10 @@ class Menu extends React.Component {
 	render() {
 		var decks = DeckAPI.getDecks();
 		var renderBattle = () => {
-			if(decks.length > 0)
+			if(decks.length == 0)
 			{
 				return (<li>
-							<NavLink to="/battle" 
-							activeClassName="active-link" 
-							activeStyle={{fontWeight: 'bold'}}>
+							<NavLink to="/battle">
 							Battle</NavLink></li>)
 			} else {
 				return (<li>

@@ -9,23 +9,23 @@ class Card extends React.Component {
 	render() {
 		var {id, classes, atk, mana, hp, player, currentPlayer, whereIs, turn, playerTurn, baseHp} = this.props;
 		var cl = 'Card ';
-		var inner = '';
 		var hpClass = '';
 		if(classes) {
-			inner = 'innerCard ' + classes;
-			cl += 'cardFrame ';
+			cl += classes;
 			if(currentPlayer.mana >= mana && whereIs === 'Hand' && player === playerTurn) {
-				inner += ' playerActive';
+				cl += ' playerActive';
 			}
 			if(turn > 0 && whereIs === 'Forces' && player === playerTurn) {
-				inner += ' playerActive';
+				cl += ' playerActive';
 			}
 			if(hp < baseHp) {
 				hpClass = ' debuffText';
 			}
+		} else {
+			cl += 'cardBack';
 		}
 		var renderStats = () => {
-			if(inner)
+			if(classes)
 			return (
 				<div>
 					<div className="manaCard">
@@ -47,9 +47,6 @@ class Card extends React.Component {
 		onMouseLeave={this.props.onMouseLeave}
 		onMouseMove={this.props.onMouseMove}
 		>
-			<div className={inner}>
-
-			</div>
 			{renderStats()}
 		</div>
 		);
