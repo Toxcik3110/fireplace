@@ -12,7 +12,7 @@ export class DeckBuilder extends React.Component {
 		this.state = {
 			deck: [],
 			start: 0,
-			gridSize: 6,
+			gridSize: 4,
 			sStart: 0,
 		}
 		this.increaseStart = this.increaseStart.bind(this);
@@ -51,27 +51,49 @@ export class DeckBuilder extends React.Component {
 
 	render() {
 		var {deck, start, sStart, gridSize} = this.state;
-		console.log(collection)
+		// console.log(this.state);
 		var renderFlex = () => {
+			var that = this;
+			console.log(this.state);
 			if(deck.length !== 0) {
 				var newdeck = [];
+				console.log(deck);
 				var newStart = start % deck.length;
-				for(var i = newStart; i < newStart + gridSize; i++) {
+				var limit = deck.length < gridSize ? deck.length : (newStart + gridSize);
+				console.log(limit);
+				for(var i = newStart; i < limit; i++) {
 					if(i < 0) {
-						newdeck.push(deck[i + deck.length]);
+						newdeck = [...newdeck, deck[i + deck.length]]
 					} else if(i > (deck.length - 1)) {
-						newdeck.push(deck[i - deck.length]);
+						newdeck = [...newdeck, deck[i - deck.length]];
 					} else {
-						newdeck.push(deck[i]);
+						newdeck = [...newdeck, deck[i]];
 					}
 				}
-				// console.log(newdeck);
+				console.log(newdeck);
 
-				return (<div className="cardGap cardFlex justifyAround">
-					{newdeck.map((elem) => {
-						return (<div key={uuid()}>{elem}</div>)
-					})}
-				</div>);
+				return (newdeck.map((card) => {
+						if(card)
+						return (<Card 
+							key={uuid()} 
+							{...card}
+							classes={card.classes ? card.classes : ''}
+							whereIs={'DeckBuilder'}
+							onClick={(e) => {
+								e.preventDefault();
+								that.setState({
+									deck:that.state.deck.filter((c) => {
+										return (c !== card);
+									}),
+								});
+							}}
+							onMouseEnter={(e) => {
+							}}
+							onMouseLeave={(e) => {
+							}}
+							onMouseMove={(e) => {
+							}}/>)
+					}));
 
 			} else {
 				return (<div className="cardGap cardFlex centerFlex">
@@ -82,15 +104,18 @@ export class DeckBuilder extends React.Component {
 			}
 		}
 		var renderCollection = () => {
+			var that = this;
 			var newcollection = [];
 			var newStart = sStart % collection.length;
-			for(var i = newStart; i < newStart + gridSize; i++) {
+			var limit = collection.length < gridSize ? collection.length : (newStart + gridSize);
+			for(var i = newStart; i < limit; i++) {
+			// for(var i = newStart; i < newStart + gridSize; i++) {
 				if(i < 0) {
-					newcollection.push(collection[i + collection.length]);
+					newcollection = [...newcollection, collection[i + collection.length]]
 				} else if(i > (collection.length - 1)) {
-					newcollection.push(collection[i - collection.length]);
+					newcollection = [...newcollection, collection[i - collection.length]];
 				} else {
-					newcollection.push(collection[i]);
+					newcollection = [...newcollection, collection[i]];
 				}
 			}
 			return (
@@ -102,6 +127,11 @@ export class DeckBuilder extends React.Component {
 							classes={card.classes ? card.classes : ''}
 							whereIs={'DeckBuilder'}
 							onClick={(e) => {
+								e.preventDefault();
+								console.log('Click')
+								that.setState({
+									deck:[...that.state.deck, card],
+								});
 							}}
 							onMouseEnter={(e) => {
 							}}
@@ -117,6 +147,7 @@ export class DeckBuilder extends React.Component {
 		return (
 			<div className="cardFlex fullWidth fullHeight columnOrder">
 				<div className="cardGap cardFlex alignCenter">
+					<div className="cardGap"></div>
 					<div className="cardGap">
 						<NavLink to="/decks">
 							<button className='button large alert expanded'>
@@ -125,17 +156,18 @@ export class DeckBuilder extends React.Component {
 						</NavLink>
 					</div>
 					<div className="cardGap"></div>
-					<div className="cardGap3">
-							<input type="text" className='bigInput centerText' placeholder="Deck name..." />
+					<div className="cardGap5">
+						<input type="text" className='bigInput centerText' placeholder="Deck name..." />
 					</div>
 					<div className="cardGap"></div>
 					<div className="cardGap">
 						<NavLink to="/decks">
 							<button className='button large success expanded'>
-								Create new Deck
+								Create Deck
 							</button>
 						</NavLink>
 					</div>
+					<div className="cardGap"></div>
 				</div>
 				<div className="cardGap4 cardFlex columnOrder">
 					<h2 className='centerText'>Your Collection</h2>
