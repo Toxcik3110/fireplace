@@ -18,7 +18,6 @@ class MainApp extends React.Component {
 					<Route exact path='/' component={Menu} />
 					<Route path='/battle' component={Battle} />
 					<Route path='/decks' component={Decks} />
-					<Route path='/deckBuilder' component={DeckBuilder} />
 				</div>
 			</Router>
 		);

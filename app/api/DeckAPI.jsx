@@ -12,6 +12,9 @@ export var addDeck = (deck) => {
 	} catch(e) {
 		// console.error('faild')
 	}
+	decks.filter((item) => {
+		return deck.name !== item.name;
+	})
 	decks = [...decks, deck];
 	localStorage.setItem('decks', JSON.stringify(decks))
 	return decks;

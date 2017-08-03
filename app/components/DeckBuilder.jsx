@@ -10,12 +10,18 @@ export class DeckBuilder extends React.Component {
 
 	constructor(props) {
 		super(props);
+		var name = '';
+		var deck = [];
+		if(this.props.playerDeck) {
+			name = this.props.playerDeck.name;
+			deck = [...this.props.playerDeck.deck];
+		}
 		this.state = {
-			deck: [],
+			deck: deck,
 			start: 0,
 			gridSize: 4,
 			sStart: 0,
-			name: '',
+			name: name,
 		}
 		this.increaseStart = this.increaseStart.bind(this);
 		this.decreaseStart = this.decreaseStart.bind(this);
@@ -100,6 +106,7 @@ export class DeckBuilder extends React.Component {
 			}
 		}
 		var renderCollection = () => {
+			var {showDeckBuilder, deck} = this.props;
 			var that = this;
 			var newcollection = [];
 			var newStart = sStart % collection.length;
@@ -145,11 +152,15 @@ export class DeckBuilder extends React.Component {
 				<div className="cardGap cardFlex alignCenter">
 					<div className="cardGap"></div>
 					<div className="cardGap">
-						<NavLink to="/decks">
-							<button className='button large alert expanded'>
-								Exit
-							</button>
-						</NavLink>
+						<button 
+						className='button large alert expanded'
+						onClick={(e) => {
+							e.preventDefault();
+							this.props.showDeckBuilder();
+						}}
+						>
+							Exit
+						</button>
 					</div>
 					<div className="cardGap"></div>
 					<div className="cardGap5">
@@ -166,16 +177,19 @@ export class DeckBuilder extends React.Component {
 					</div>
 					<div className="cardGap"></div>
 					<div className="cardGap">
-						<NavLink to="/decks" onClick={(e) => {
+						<button 
+						className='button large success expanded'
+						onClick={(e) => {
+							e.preventDefault();
 							DeckAPI.addDeck({
 								name:this.state.name,
 								deck:this.state.deck,
 							});
-						}} >
-							<button className='button large success expanded'>
-								Create Deck
-							</button>
-						</NavLink>
+							this.props.showDeckBuilder(undefined, true);
+						}}
+						>
+							Create Deck
+						</button>
 					</div>
 					<div className="cardGap"></div>
 				</div>
@@ -187,7 +201,7 @@ export class DeckBuilder extends React.Component {
 							<button 
 							className='button large primary expanded'
 							onClick={this.decreaseStart}
-							disabled={this.state.deck.length < this.state.gridSize}
+							disabled={deck.length < this.state.gridSize}
 							>
 								{'<='}
 							</button>
@@ -201,7 +215,7 @@ export class DeckBuilder extends React.Component {
 							<button 
 							className='button large primary expanded'
 							onClick={this.increaseStart}
-							disabled={this.state.deck.length < this.state.gridSize}
+							disabled={deck.length < this.state.gridSize}
 							>
 								{'=>'}
 							</button>
