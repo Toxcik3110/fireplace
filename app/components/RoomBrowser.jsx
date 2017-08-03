@@ -1,6 +1,8 @@
 import React from 'react';
 import {socket} from 'MainApp';
 import {NavLink} from 'react-router-dom';
+import uuid from 'node-uuid';
+
 import Room from 'Room';
 
 export class RoomBrowser extends React.Component {
@@ -37,7 +39,7 @@ export class RoomBrowser extends React.Component {
 		var {rooms, room} = this.state;
 		var renderRooms = () => {
 			return rooms.map((room) => {
-				return (<div className='cardFlex justifyAround alignCenter'>
+				return (<div key={uuid()} className='cardFlex callout secondary justifyAround alignCenter'>
 							<h1 className='cardGap3'>{room.name}</h1>
 							<h1 className='cardGap3'><small>{room.creator}</small></h1>
 							<button 
@@ -66,10 +68,10 @@ export class RoomBrowser extends React.Component {
 		} else {
 			return (
 				<div className="cardFlex fullWidth fullHeight columnOrder">
-					<div className='cardGap cardFlex'>
+					<div className='cardGap cardFlex centerFlex'>
 						<div className='cardGap'></div>
-						<div className='cardGap cardFlex centerFlex'>
-							<NavLink to="/">
+						<div className='cardGap cardFlex'>
+							<NavLink to="/" className='cardGap'>
 								<button className='button large alert expanded'>
 									Back
 								</button>
@@ -81,7 +83,7 @@ export class RoomBrowser extends React.Component {
 						<div className='cardGap'></div>
 						<div className='cardGap'></div>
 					</div>
-					<div className='cardGap5 callout secondary'>
+					<div className='cardGap5 callout'>
 						{renderRooms()}
 					</div>
 					<div className='cardGap cardFlex centerFlex'>
