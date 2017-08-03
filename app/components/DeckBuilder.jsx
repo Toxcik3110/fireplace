@@ -12,9 +12,9 @@ export class DeckBuilder extends React.Component {
 		super(props);
 		var name = '';
 		var deck = [];
-		if(this.props.playerDeck) {
-			name = this.props.playerDeck.name;
-			deck = [...this.props.playerDeck.deck];
+		if(this.props.playerDeck !== null) {
+			if(this.props.playerDeck.name) name = this.props.playerDeck.name;
+			if(this.props.playerDeck.deck) deck = [...this.props.playerDeck.deck];
 		}
 		this.state = {
 			deck: deck,
@@ -185,7 +185,7 @@ export class DeckBuilder extends React.Component {
 								name:this.state.name,
 								deck:this.state.deck,
 							});
-							this.props.showDeckBuilder(undefined, true);
+							this.props.showDeckBuilder(null, true);
 						}}
 						>
 							Create Deck

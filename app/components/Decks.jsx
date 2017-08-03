@@ -15,7 +15,7 @@ export class Decks extends React.Component {
 			start: 0,
 			gridSize: 6,
 			showDeckBuilder:false,
-			deck:undefined,
+			deck:null,
 		}
 		this.increaseStart = this.increaseStart.bind(this);
 		this.decreaseStart = this.decreaseStart.bind(this);
@@ -73,12 +73,12 @@ export class Decks extends React.Component {
 						return (
 							<div key={uuid()} className='justifySelfCenter alignSelfCenter'>
 								<button 
-								className='button large success expanded hollow'
+								className='button large primary expanded hollow'
 								onClick={(e) => {
 									this.enableDeckBuilder(deck);
 								}}
 								>
-									{deck.name}
+									Deck: {deck.name}
 								</button>
 							</div>)
 					})}
@@ -129,7 +129,7 @@ export class Decks extends React.Component {
 							<div className="cardGap"></div>
 							<div className="cardGap3">
 								<button 
-								className='button large success hollow expanded'
+								className='button large primary hollow expanded'
 								onClick={this.enableDeckBuilder}
 								>
 									Create new Deck
