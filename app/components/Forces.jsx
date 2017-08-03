@@ -40,16 +40,21 @@ export class Forces extends React.Component {
 					dispatch(actions.tooltipShow());
 					var rect = e.target.getBoundingClientRect();
 					dispatch(actions.captureMouse(rect.top,rect.left,rect.width,rect.height))
+					var obj = {
+						...card,
+						key:uuid(),
+						classes:card.classes ? card.classes : '',
+						whereIs:'Tooltip',
+					};
+					dispatch(actions.captureComponent(Card, obj));
 				}}
 				onMouseLeave={(e) => {
 					dispatch(actions.tooltipHide());
-				}}
-				onMouseMove={(e) => {
-					// dispatch(actions.mouseMove(e.pageX, e.pageY))
-				}}
-				/>)
+				}} 
+				/>);
 			});
 		}
+
 		return (
 		<div className="forces" onContextMenu={(e) => {
 					e.preventDefault();

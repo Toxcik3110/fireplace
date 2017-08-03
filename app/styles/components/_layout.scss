@@ -84,7 +84,7 @@
 
 	}
 
-	.Hand .Card, .forces .Card, .cardCollection .Card {
+	.Hand .Card, .forces .Card, .cardCollection .Card, .cardToolTip .Card {
 		width:11vw;
 		height:100%;
 		// z-index:0;
@@ -101,12 +101,19 @@
 		justify-content: space-between;
 	}
 
-	.Hand .Card .cardBack, .forces .Card .cardBack, .cardCollection .Card .cardBack {
+	.Hand .Card .cardBack, 
+	.forces .Card .cardBack, 
+	.cardCollection .Card .cardBack,
+	.cardToolTip .Card .cardBack {
 		background-image: $cardback_50;
 	}
 
 	.cardCollection .Card {
 		
+	}
+
+	.cardToolTip .Card {
+		width:100%;
 	}
 
 	.Hand .Card {
@@ -300,8 +307,8 @@
 	z-index:4;
 	font-size:2rem;
 	color:white;
-	border:2px solid white;
-	padding:20px;
+	// border:2px solid white;
+	// padding:20px;
 }
 
 .cardModal {

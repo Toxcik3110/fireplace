@@ -52,6 +52,25 @@
 		font-size: 1rem;
 	}
 } 
+.cardToolTip {
+	.manaCard, .atkCard, .hpCard {
+		font-size: 3rem;
+	}
+	.manaCard {
+	top:1%;
+	// background-color:blue;
+	}
+	.atkCard {
+		bottom:2%;
+		left:10%;
+		// background-color:yellow;
+	}
+	.hpCard {
+		bottom:2%;
+		right:8%;
+		// background-color:red;
+	}
+} 
 .manaCard {
 	top:0%;
 	left:10%;

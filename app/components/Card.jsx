@@ -23,9 +23,6 @@ class Card extends React.Component {
 			if(hp < baseHp) {
 				hpClass = ' debuffText';
 			}
-			if(whereIs === 'DeckBuilder') {
-
-			}
 		} else {
 			cl += 'cardBack';
 		}

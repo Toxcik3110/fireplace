@@ -417,6 +417,8 @@ export var tooltipReducer = (state = {x:0,
 									width:0,
 									top:0,
 									height:0,
+									Component:undefined,
+									ComponentProps:undefined,
 									}, action) => {
 	switch(action.type) {
 		case 'TOOLTIP_SHOW':
@@ -447,6 +449,12 @@ export var tooltipReducer = (state = {x:0,
 				width:action.width,
 				height:action.height,
 				top:action.top,
+			}
+		case 'CAPTURE_COMPONENT':
+			return {
+				...state,
+				Component:action.component,
+				ComponentProps:action.componentProps,
 			}
 		default:
 			return state;

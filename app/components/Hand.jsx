@@ -32,15 +32,19 @@ export class Hand extends React.Component {
 					}
 				}}
 				onMouseEnter={(e) => {
-					// dispatch(actions.tooltipShow());
-					// var rect = e.target.getBoundingClientRect();
-					// dispatch(actions.captureMouse(rect.top,rect.left,rect.width,rect.height))
+					dispatch(actions.tooltipShow());
+					var rect = e.target.getBoundingClientRect();
+					dispatch(actions.captureMouse(rect.top,rect.left,rect.width,rect.height))
+					var obj = {
+						...card,
+						key:uuid(),
+						classes:card.classes ? card.classes : '',
+						whereIs:'Tooltip',
+					};
+					dispatch(actions.captureComponent(Card, obj));
 				}}
 				onMouseLeave={(e) => {
-					// dispatch(actions.tooltipHide());
-				}}
-				onMouseMove={(e) => {
-					// dispatch(actions.mouseMove(e.pageX, e.pageY))
+					dispatch(actions.tooltipHide());
 				}}
 				/>)
 		})
