@@ -13,11 +13,11 @@ export class Room extends React.Component {
 			start: 0,
 			gridSize: 6,
 			deck:undefined,
-			// enemy:undefined,
-			enemy: {
-				name: 'Toxcik',
-				ready: false,
-			}
+			enemy:undefined,
+			// enemy: {
+			// 	name: 'Toxcik',
+			// 	ready: true,
+			// }
 		}
 	}
 	render() {
@@ -67,7 +67,7 @@ export class Room extends React.Component {
 			} else {
 				return (<div className="cardGap cardFlex centerFlex">
 					<h1>
-						<small>Empty</small>
+						<small>Waiting for enemy...</small>
 					</h1>
 				</div>)	
 			}
