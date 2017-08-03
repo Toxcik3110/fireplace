@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import Menu from 'Menu';
+import RoomBrowser from 'RoomBrowser';
 import Battle from 'Battle';
 import Decks from 'Decks';
 import DeckBuilder from 'DeckBuilder';
@@ -17,9 +18,6 @@ class MainApp extends React.Component {
 
 	constructor(props) {
 		super(props);
-		socket.on('connect', function(){});
-		socket.on('event', function(data){});
-		socket.on('disconnect', function(){});
 	}
 	render() {
 		//enable socket
@@ -29,6 +27,7 @@ class MainApp extends React.Component {
 				<div>
 					<Route exact path='/' component={Menu} />
 					<Route path='/battle' component={Battle} />
+					<Route path='/browser' component={RoomBrowser} />
 					<Route path='/decks' component={Decks} />
 				</div>
 			</Router>

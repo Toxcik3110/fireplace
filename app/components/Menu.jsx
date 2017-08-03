@@ -16,14 +16,14 @@ class Menu extends React.Component {
 			if(decks.length > 0)
 			{
 				return (<li>
-							<NavLink to="/battle">
-							Battle</NavLink></li>)
+							<NavLink to="/browser">
+							Search game</NavLink></li>)
 			} else {
 				return (<li>
 					<NavLink to="/" style={{color:'red'}} 
 					onClick={(e) => {
 						alert('Not enough decks to play! Create some in "Decks" menu!')
-					}}>Battle</NavLink>
+					}}>Search game</NavLink>
 					</li>)
 			}
 		}

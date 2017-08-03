@@ -28,9 +28,11 @@ var rooms = [
 			];
 
 io.on('connection', function (socket) {
+	console.log('user connected');
 	socket.emit('news', { hello: 'world' });
 
 	socket.on('getRooms', function () {
+		console.log('GET: ROOMS');
 		socket.emit('rooms', { rooms:rooms });
 	});
 
