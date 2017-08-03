@@ -134,10 +134,10 @@ export var searchDeck = (id) => {
 	}
 }
 
-export var removeDeck = (id) => {
+export var removeDeck = (deck) => {
 	return {
 		type:'REMOVE_DECK',
-		id,
+		deck,
 	}
 }
 

@@ -47,9 +47,10 @@ export var setDecks = (decks) => {
 	}
 }
 
-export var removeDeck = (deck, id) => {
-	decks = decks.filter((deck) => {
-		return deck.id !== id;
+export var removeDeck = (deck) => {
+	var decks = getDecks();
+	decks = decks.filter((item) => {
+		return deck.name !== item.name;
 	});
 
 	return setDecks(decks);

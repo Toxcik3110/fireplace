@@ -80,6 +80,16 @@ export class Decks extends React.Component {
 								>
 									Deck: {deck.name}
 								</button>
+								<button 
+								className='button large alert expanded hollow'
+								onClick={(e) => {
+									this.setState({
+										decks:DeckAPI.removeDeck(deck),
+									});
+								}}
+								>
+									Remove deck
+								</button>
 							</div>)
 					})}
 				</div>);
