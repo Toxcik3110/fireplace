@@ -6,7 +6,7 @@ import Battle from 'Battle';
 import Decks from 'Decks';
 import DeckBuilder from 'DeckBuilder';
 import io from 'socket.io-client';
-const socket = io(); 
+export const socket = io(); 
 
 socket.on('news', function (data) {
 	console.log(data);

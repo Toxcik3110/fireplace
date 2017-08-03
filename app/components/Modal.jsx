@@ -21,8 +21,8 @@ export class Modal extends React.Component {
 		var renderData = () => {
 			return (<div className="cardGap2 cardFlex columnOrder">
 						<div className="cardGap">
-							<h1 className='page-title'>
-								GAME OVER
+							<h1 className='page-title' style={{color:'red'}}>
+								YOU LOOSE
 							</h1>
 						</div>
 						<div className="cardGap cardFlex centerFlex">

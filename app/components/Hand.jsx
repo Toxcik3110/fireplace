@@ -53,25 +53,22 @@ export class Hand extends React.Component {
 					e.preventDefault();
 					var data = {
 						header: ()=>{
-							return (<div>
-									<h1 className='page-title'>
-										MENU
-									</h1>
-								</div>);
+							return (<div><h1 className='page-title'>MENU</h1></div>);
 						},
 						body: ()=>{
-							return (<div>
-										<NavLink to='/' onClick={(e) => {
-											dispatch(actions.modalHide());
-										}} >
-											<button className='button hollow expanded'>Exit to MainMenu</button>
-										</NavLink>
-										<NavLink to='/battle' onClick={(e) => {
-											dispatch(actions.modalHide());
-										}} >
-											<button className='button hollow expanded'>Return to game</button>
-										</NavLink>
-									</div>);
+							return (
+							<div>
+								<NavLink to='/' onClick={(e) => {
+									dispatch(actions.modalHide());
+								}} >
+									<button className='button hollow expanded'>Exit to MainMenu</button>
+								</NavLink>
+								<NavLink to='/battle' onClick={(e) => {
+									dispatch(actions.modalHide());
+								}} >
+									<button className='button hollow expanded'>Return to game</button>
+								</NavLink>
+							</div>);
 						},
 					}
 					dispatch(actions.modalShow(data));
