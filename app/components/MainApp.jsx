@@ -5,13 +5,25 @@ import Menu from 'Menu';
 import Battle from 'Battle';
 import Decks from 'Decks';
 import DeckBuilder from 'DeckBuilder';
+import io from 'socket.io-client';
+const socket = io(); 
+
+socket.on('news', function (data) {
+	console.log(data);
+	socket.emit('my other event', { my: 'data' });
+});
 
 class MainApp extends React.Component {
 
 	constructor(props) {
 		super(props);
+		socket.on('connect', function(){});
+		socket.on('event', function(data){});
+		socket.on('disconnect', function(){});
 	}
 	render() {
+		//enable socket
+
 		return (
 			<Router>
 				<div>

@@ -16,6 +16,7 @@ export var configure = (initialState) => {
 		tooltip: reducers.tooltipReducer,
 		modal: reducers.modalReducer,
 		decks: reducers.deckReducer,
+		socket: reducers.socketReducer,
 	});
 	var store = redux.createStore(reducer, initialState);
 

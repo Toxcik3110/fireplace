@@ -500,3 +500,10 @@ export var deckReducer = (state = [], action) => {
 			return state;
 	}
 }
+
+export var socketReducer = (state = {}, action) => {
+	switch(action.type) {
+		default:
+			return state;
+	}
+}
