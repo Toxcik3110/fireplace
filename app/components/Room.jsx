@@ -77,7 +77,7 @@ export class Room extends React.Component {
 			}
 		}
 		var renderEnemy = () => {
-			if(this.state.enemy) {
+			if(this.state.enemy !== undefined) {
 				return (
 					<div className="cardGap cardFlex centerFlex">
 						<h1 className='cardGap cardFlex centerFlex'>{this.state.enemy.name}</h1>
@@ -97,7 +97,7 @@ export class Room extends React.Component {
 			}
 		}
 		var renderControls = () => {
-			
+
 		}
 		return (
 			<div className="cardFlex fullWidth fullHeight">

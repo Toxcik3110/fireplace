@@ -68,7 +68,7 @@ export class RoomBrowser extends React.Component {
 							onClick={(e) => {
 								var data = {
 									header: ()=>{
-										return (<div><h1 className='page-title'>Enter your name</h1></div>);
+										return (<div><h1 className='page-title'>Join to the game</h1></div>);
 									},
 									body: ()=>{
 										return (
@@ -159,7 +159,69 @@ export class RoomBrowser extends React.Component {
 						</div>
 						<div className='cardGap'></div>
 						<div className='cardGap5'>
-							<button className='button large success hollow expanded'>
+							<button 
+							className='button large success hollow expanded'
+							onClick={(e) => {
+								var data = {
+									header: ()=>{
+										return (<div><h1 className='page-title'>Create game</h1></div>);
+									},
+									body: ()=>{
+										return (
+										<div>
+											<div>
+												<input 
+												type='text' 
+												placeholder='Enter your name'
+												onChange={(e) => {
+													this.setState({
+														playerName:e.target.value,
+													});
+												}}
+												value={this.state.playerName}
+												/>
+												<input 
+												type='text' 
+												placeholder='Enter room name'
+												onChange={(e) => {
+													this.setState({
+														roomName:e.target.value,
+													});
+												}}
+												value={this.state.roomName}
+												/>
+											</div>
+											<div>
+												<button 
+												className='button large alert hollow expanded'
+												onClick={(e) => {
+													dispatch(actions.modalHide());
+													this.changeNameRoom();
+												}}
+												>
+													{'Cancel'}
+												</button>
+												<button 
+												className='button large success hollow expanded'
+												onClick={(e) => {
+													dispatch(actions.modalHide());
+													this.setState({
+														room:{
+															name:this.state.roomName,
+															creator:this.state.palyerName,
+														},
+													});
+												}}
+												>
+													{'Join game'}
+												</button>
+											</div>
+										</div>);
+									},
+								}
+								dispatch(actions.modalShow(data));
+							}}
+							>
 								{'Create game'}
 							</button>
 						</div>
