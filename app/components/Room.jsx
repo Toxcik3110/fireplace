@@ -13,7 +13,9 @@ export class Room extends React.Component {
 			start: 0,
 			gridSize: 6,
 			deck:undefined,
-			enemy:undefined,
+			enemy:this.props.playerName === this.props.creator 
+				? undefined 
+				: {name:this.props.creator, ready:false},
 			// enemy: {
 			// 	name: 'Toxcik',
 			// 	ready: true,
@@ -21,8 +23,10 @@ export class Room extends React.Component {
 		}
 	}
 	render() {
-		var {name, creator, onClick} = this.props;
-		var {ready, decks, start, gridSize, deck} = this.state;
+		var {name, creator, onClick, playerName} = this.props;
+		var {ready, decks, start, gridSize, deck, enemy} = this.state;
+		if(creator === playerName) {
+		}
 		var renderGrid = () => {
 			if(decks.length !== 0) {
 				console.log(decks);
@@ -92,6 +96,9 @@ export class Room extends React.Component {
 				)
 			}
 		}
+		var renderControls = () => {
+			
+		}
 		return (
 			<div className="cardFlex fullWidth fullHeight">
 				<div className="cardGap"></div>
@@ -103,7 +110,7 @@ export class Room extends React.Component {
 							</button>
 						</div>
 						<div className='cardGap'></div>
-						<h1 className='page-title'>Select Deck</h1>
+						<h1 className='page-title'>Select Deck, {playerName || 'stranger'}!</h1>
 						<div className='cardGap'></div>
 						<div className='cardGap cardFlex'>
 							<button className='button large success expanded' disabled={!deck}>

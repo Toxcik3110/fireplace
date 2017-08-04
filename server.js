@@ -37,7 +37,17 @@ io.on('connection', function (socket) {
 	});
 
 	socket.on('createRoom', function(data) {
-		if(data) {
+		console.log('createRoom data', data);
+		if((rooms.filter((room) => {return room.name === data.name})).length === 0) {
+			socket.emit('createRoom', { result:true, });
+		} else {
+			socket.emit('createRoom', { result:false, });
+		}
+	});
+
+	socket.on('joinRoom', function(data) {
+		console.log('joinRoom data', data);
+		if((rooms.filter((room) => {return room.name === data.name})).length === 0) {
 			socket.emit('createRoom', { result:true, });
 		} else {
 			socket.emit('createRoom', { result:false, });

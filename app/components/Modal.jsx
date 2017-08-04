@@ -10,9 +10,10 @@ export class Modal extends React.Component {
 	render() {
 		// var {tooltip} = this.props;
 		var {modal, dispatch} = this.props;
-		var style = modal.show ? {'zIndex':5} : {'zIndex':0};
+		var style = modal.show ? {'display':'visible'} : {'visibility':'hidden'};
 		style = {
 			...style,
+			zIndex:5,
 			// top:tooltip.top,
 			// height:tooltip.height,
 			// left:tooltip.left + tooltip.width + 20,
