@@ -208,12 +208,12 @@ export class RoomBrowser extends React.Component {
 													this.setState({
 														room:{
 															name:this.state.roomName,
-															creator:this.state.palyerName,
+															creator:this.state.playerName,
 														},
 													});
 												}}
 												>
-													{'Join game'}
+													{'Create game'}
 												</button>
 											</div>
 										</div>);
