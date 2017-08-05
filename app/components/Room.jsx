@@ -1,6 +1,7 @@
 import React from 'react';
 import uuid from 'node-uuid';
 
+import {socket} from 'MainApp';
 import * as DeckAPI from 'DeckAPI';
 
 export class Room extends React.Component {
@@ -21,10 +22,32 @@ export class Room extends React.Component {
 			// 	ready: true,
 			// }
 		}
+		socket.on('joinRoom', (data) => {
+			console.log('join room', data);
+			if(data.playerName) {
+				this.setState({
+					enemy:{
+						name:data.playerName,
+						ready:false,
+					},
+				});
+			}
+		});
+		socket.on('closeRoom', (data) => {
+			// this.updateRooms(data);
+		});
+		socket.on('leaveRoom', (data) => {
+			if(!data) {
+				this.setState({
+					enemy:undefined,
+				})
+			}
+		});
 	}
 	render() {
 		var {name, creator, onClick, playerName} = this.props;
 		var {ready, decks, start, gridSize, deck, enemy} = this.state;
+		console.log('player Name', playerName);
 		var renderGrid = () => {
 			if(decks.length !== 0) {
 				console.log(decks);
@@ -94,12 +117,25 @@ export class Room extends React.Component {
 				)
 			}
 		}
+		var controlClick = (e) => {
+			socket.emit('closeRoom', {
+					room: {
+						name:room.name,
+						creator:room.creator,
+					},
+			});
+			onClick(e);
+		}
 		var renderControls = () => {
 			if(playerName === creator) {
 				return (
 					<div>
 						<div className='cardGap'>
-						<button className='button large alert expanded' disabled={false}>
+						<button 
+						className='button large alert expanded' 
+						disabled={false} 
+						onClick={controlClick}
+						>
 							Leave game and close this room
 						</button>
 						</div>
@@ -125,7 +161,19 @@ export class Room extends React.Component {
 				<div className="cardGap5 cardFlex columnOrder">
 					<div className='cardGap cardFlex centerFlex'>
 						<div className='cardGap cardFlex'>
-							<button className='button large alert expanded' onClick={onClick}>
+							<button 
+							className='button large alert expanded' 
+							onClick={(e) => {
+								e.preventDefault();
+								socket.emit('leaveRoom', {
+									room: {
+										name:name,
+										creator:creator,
+									},
+								});
+							}}
+							disabled={playerName === creator}
+							>
 								Canel
 							</button>
 						</div>
@@ -133,8 +181,11 @@ export class Room extends React.Component {
 						<h1 className='page-title'>Select Deck, {playerName || 'stranger'}!</h1>
 						<div className='cardGap'></div>
 						<div className='cardGap cardFlex'>
-							<button className='button large success expanded' disabled={!deck}>
-								{!ready ? 'Ready' : 'Not ready'}
+							<button 
+							className='button large success expanded' 
+							disabled={!deck}
+							>
+								{deck ? 'Ready' : 'Not ready'}
 							</button>
 						</div>
 					</div>

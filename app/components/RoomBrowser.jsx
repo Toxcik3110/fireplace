@@ -1,9 +1,9 @@
 import React from 'react';
-import {socket} from 'MainApp';
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import uuid from 'node-uuid';
 
+import {socket} from 'MainApp';
 import * as actions from 'actions';
 import Room from 'Room';
 import Modal from 'Modal';
@@ -25,6 +25,43 @@ export class RoomBrowser extends React.Component {
 		socket.emit('getRooms');
 		socket.on('rooms', (data) => {
 			this.updateRooms(data);
+		});
+		socket.on('joinRoom', (data) => {
+			if(data.result === true) {
+				console.log('join room',data);
+				this.setState({
+					room:data.room,
+				});
+			}
+
+		});
+		socket.on('closeRoom', (data) => {
+			this.setState({
+				room:undefined,
+			})
+		});
+		socket.on('leaveRoom', (data) => {
+			if(data) {
+				this.setState({
+					room:undefined,
+				});
+			}
+		});
+		socket.on('createRoom', (data) => {
+			if(data.result === true) {
+				console.log('created room', data);
+				this.setState({
+					room:{
+						name:data.room.roomName,
+						creator:data.room.playerName,
+					},
+					playerName:data.room.playerName,
+				});
+			} else if (data.result === false) {
+				this.setState({
+					room:undefined,
+				});
+			}
 		});
 		// this.props.dispatch(actions.modalHide())
 		this.updateRooms = this.updateRooms.bind(this);
@@ -99,8 +136,12 @@ export class RoomBrowser extends React.Component {
 												className='button large success hollow expanded'
 												onClick={(e) => {
 													dispatch(actions.modalHide());
-													this.setState({
-														room:room,
+													socket.emit('joinRoom', {
+														room: {
+															name:room.name,
+															creator:room.creator,
+														},
+														playerName:this.state.playerName,
 													});
 												}}
 												>
@@ -205,12 +246,11 @@ export class RoomBrowser extends React.Component {
 												className='button large success hollow expanded'
 												onClick={(e) => {
 													dispatch(actions.modalHide());
-													this.setState({
-														room:{
-															name:this.state.roomName,
-															creator:this.state.playerName,
-														},
-													});
+													socket.emit('createRoom', {room: {
+														name:this.state.roomName,
+														creator:this.state.playerName,
+														playerName:this.state.playerName,
+													}})
 												}}
 												>
 													{'Create game'}
@@ -227,7 +267,12 @@ export class RoomBrowser extends React.Component {
 						</div>
 						<div className='cardGap'></div>
 						<div className='cardGap3'>
-							<button className='button large primary expanded'>
+							<button 
+							className='button large primary expanded'
+							onClick={(e) => {
+								socket.emit('getRooms')
+							}}
+							>
 								{'Refresh'}
 							</button>
 						</div>

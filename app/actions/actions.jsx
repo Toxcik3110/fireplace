@@ -5,11 +5,26 @@ export var endTurn = (player) => {
 	}
 }
 
+export var setTurn = (player) => {
+	return {
+		type:'SET_TURN',
+		player,
+	}
+}
+
 export var generateDeck = (player) => {
 	return {
 		type:'GENERATE_DECK',
 		player,
 		size:30,
+	}
+}
+
+export var setDeck = (player, deck) => {
+	return {
+		type:'SET_DECK',
+		player,
+		deck,
 	}
 }
 

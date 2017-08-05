@@ -160,6 +160,13 @@ export var playerDeckReducer = (state = [], action) => {
 			} else {
 				return state;
 			}
+		case 'SET_DECK': {
+			if(action.player == 'player') {	
+				return [...action.deck];
+			} else {
+				return state;
+			}
+		}
 		default:
 			return state;
 	}
@@ -296,6 +303,13 @@ export var enemyDeckReducer = (state = [], action) => {
 			} else {
 				return state;
 			}
+		case 'SET_DECK': {
+			if(action.player == 'enemy') {	
+				return [...action.deck];
+			} else {
+				return state;
+			}
+		}
 		default:
 			return state;
 	}
@@ -371,6 +385,8 @@ export var enemyForcesReducer = (state = [], action) => {
 
 export var turnReducer = (state = 'player', action) => {
 	switch(action.type) {
+		case 'SET_TURN':
+			return action.player;
 		case 'END_TURN':
 			return state === 'player' ? 'enemy' : 'player';
 		default:
