@@ -48,10 +48,12 @@ io.on('connection', function (socket) {
 				creator:data.room.creator,
 				creatorSocket:socket,
 				playerSocket:undefined,
+				ready:false,
 			});
 			justRooms.push({
 				name:data.room.name,
 				creator:data.room.creator,
+				ready:false,
 			});
 		} else {
 			socket.emit('createRoom', { result:false, });
@@ -77,6 +79,7 @@ io.on('connection', function (socket) {
 				socket.emit('joinRoom', { result:true, room: {
 						name:data.room.name,
 						creator:data.room.creator,
+						ready:rooms[index].ready,
 					},
 				});
 				room.creatorSocket.emit('joinRoom', { playerName:data.playerName});
@@ -156,6 +159,7 @@ io.on('connection', function (socket) {
 				} else if (data.who === 'creator') {
 					room.playerSocket.emit('selectDeck');
 					room.creatorDeck = data.deck;
+					room.ready = true;
 					activeGame = room.playerSocket;
 				}
 			}

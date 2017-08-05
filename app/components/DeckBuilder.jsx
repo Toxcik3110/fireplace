@@ -133,7 +133,7 @@ export class DeckBuilder extends React.Component {
 								e.preventDefault();
 								console.log('Click')
 								that.setState({
-									deck:[...that.state.deck, card],
+									deck:[...that.state.deck, {...card, id:uuid()}],
 								});
 							}}
 							onMouseEnter={(e) => {

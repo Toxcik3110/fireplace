@@ -18,7 +18,7 @@ export class Deck extends React.Component {
 		var playerClass = 'componentActive';
 		var enemyClass = 'enemyActive';
 		var neutralClass = '';
-
+		console.log('current deck state', deck);
 		var renderDeck = (playerSide) => {
 			var chosenClass = playerSide == 'player' ? playerClass : enemyClass;
 			var turnClass = playerSide == player ? chosenClass : neutralClass;

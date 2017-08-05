@@ -1,9 +1,11 @@
 import React from 'react';
 import uuid from 'node-uuid';
 import { Route, Redirect } from 'react-router'
+import {connect} from 'react-redux';
 
 import {socket} from 'MainApp';
 import * as DeckAPI from 'DeckAPI';
+import * as actions from 'actions';
 
 export class Room extends React.Component {
 
@@ -30,7 +32,7 @@ export class Room extends React.Component {
 				this.setState({
 					enemy:{
 						name:data.playerName,
-						ready:false,
+						ready:data.ready,
 					},
 				});
 			}
@@ -74,7 +76,7 @@ export class Room extends React.Component {
 		});
 	}
 	render() {
-		var {name, creator, onClick, playerName} = this.props;
+		var {name, creator, onClick, playerName, dispatch} = this.props;
 		var {ready, decks, start, gridSize, deck, enemy} = this.state;
 		console.log('player Name', playerName);
 		var renderGrid = () => {
@@ -103,6 +105,7 @@ export class Room extends React.Component {
 								className='button large primary expanded hollow'
 								onClick={(e) => {
 									this.setState({deck});
+									dispatch(actions.setDeck('player',[...deck.deck]));
 									socket.emit('selectDeck', {
 										roomName:name, 
 										who:playerName !== creator?'player':'creator',
@@ -267,4 +270,10 @@ export class Room extends React.Component {
 	}
 }
 
-export default Room;
+export default connect(
+	(state) => {
+		return {
+			playerDeck:state.playerDeck,
+		}
+	}
+)(Room);
