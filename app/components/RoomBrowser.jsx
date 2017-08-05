@@ -36,9 +36,11 @@ export class RoomBrowser extends React.Component {
 
 		});
 		socket.on('closeRoom', (data) => {
+			console.log('closeRoom');
 			this.setState({
 				room:undefined,
-			})
+			});
+			socket.emit('getRooms');
 		});
 		socket.on('leaveRoom', (data) => {
 			if(data) {
@@ -52,7 +54,7 @@ export class RoomBrowser extends React.Component {
 				console.log('created room', data);
 				this.setState({
 					room:{
-						name:data.room.roomName,
+						name:data.room.name,
 						creator:data.room.playerName,
 					},
 					playerName:data.room.playerName,

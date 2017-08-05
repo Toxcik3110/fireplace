@@ -117,12 +117,12 @@ export class Room extends React.Component {
 				)
 			}
 		}
+		console.log('roomName',name);
+		var roomName = name;
 		var controlClick = (e) => {
+			e.preventDefault();
 			socket.emit('closeRoom', {
-					room: {
-						name:room.name,
-						creator:room.creator,
-					},
+					roomName:name,
 			});
 			onClick(e);
 		}
@@ -174,7 +174,7 @@ export class Room extends React.Component {
 							}}
 							disabled={playerName === creator}
 							>
-								Canel
+								Cancel
 							</button>
 						</div>
 						<div className='cardGap'></div>
