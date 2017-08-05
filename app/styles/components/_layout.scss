@@ -101,10 +101,10 @@
 		justify-content: space-between;
 	}
 
-	.Hand .Card .cardBack, 
-	.forces .Card .cardBack, 
-	.cardCollection .Card .cardBack,
-	.cardToolTip .Card .cardBack {
+	.Hand .cardBack, 
+	.forces .cardBack, 
+	.cardCollection .cardBack,
+	.cardToolTip .cardBack {
 		background-image: $cardback_50;
 	}
 

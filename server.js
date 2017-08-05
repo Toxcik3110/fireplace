@@ -215,9 +215,39 @@ io.on('connection', function (socket) {
 				room.creatorSocket.emit('startGame');
 				rooms.splice(index,1);
 				justRooms.splice(index,1);
+				room.playerSocket.emit('endTurn');
 			}
 		}
 	});
 
+	socket.on('drawCard', function(data) {//1,2
+		console.log('drawCard data', data); //{card},
+		activeGame.emit('drawCard', {})		//but not show it to enemy :P
+	});
+
+	socket.on('placeCard', function(data) {//2,4
+		console.log('placeCard data', data); //{card},
+		activeGame.emit('placeCard', {card:data.card});
+	});
+
+	socket.on('endTurn', function(data) {	//5
+		console.log('endTurn data', data);//{},
+		activeGame.emit('endTurn');		//just end of player/creator turn
+	});
+
+	socket.on('attackCard', function(data) {//6
+		console.log('attackCard data', data); //{card1, card2},
+		activeGame.emit('attackCard', {card1:data.card1,card2:data.card2});
+	});
+
+	socket.on('attackPlayer', function(data) {//7
+		console.log('attackPlayer data', data); //{card},
+		activeGame.emit('attackPlayer', {card:data});
+	});
+
+	// socket.on('gameOver', function(data) {//8
+	// 	console.log('gameOver data', data); //{winner},
+	// 	activeGame.emit('gameOver', {data});//maybe dont need of it
+	// });
 
 });

@@ -3,6 +3,7 @@ import uuid from 'node-uuid';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 
+import {socket} from 'MainApp';
 import Card from 'Card';
 import * as actions from 'actions';
 
@@ -17,7 +18,7 @@ export class Hand extends React.Component {
 		var forces = player == 'player' ? pForces : eForces;
 		var currentPlayer = player == 'player' ? p : e;
 		var cardItems = [];
-		
+
 		if(hand) cardItems = hand.map((card) => {
 			return (<Card 
 				key={uuid()} 

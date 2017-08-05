@@ -44,6 +44,15 @@ export var placeCard = (player, card) => {
 	}
 }
 
+export var placeCardDirect = (player, card) => {
+	return {
+		type:'PLACE_CARD_DIRECT',
+		player,
+		card,
+	}
+}
+
+
 export var selectCard = (player, card) => {
 	return {
 		type:'SELECT_CARD',

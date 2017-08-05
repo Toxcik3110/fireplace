@@ -354,6 +354,15 @@ export var enemyForcesReducer = (state = [], action) => {
 			} else {
 				return state;
 			}
+		case 'PLACE_CARD_DIRECT':
+			if(action.player == 'enemy') {
+				return [
+					...state,
+					action.card
+				];
+			} else {
+				return state;
+			}
 		case 'ATTACK_CARD': 
 			var newState = state.map((card) => { 
 				if(action.playerCard.id === card.id) {
