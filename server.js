@@ -152,9 +152,11 @@ io.on('connection', function (socket) {
 				if(data.who === 'player') {
 					room.creatorSocket.emit('selectDeck');
 					room.playerDeck = data.deck;
+					activeGame = room.creatorSocket;
 				} else if (data.who === 'creator') {
 					room.playerSocket.emit('selectDeck');
 					room.creatorDeck = data.deck;
+					activeGame = room.playerSocket;
 				}
 			}
 		}
@@ -179,65 +181,11 @@ io.on('connection', function (socket) {
 				if(data.who === 'player') {
 					room.creatorSocket.emit('deselectDeck');
 					room.playerDeck = undefined;
+					activeGame = undefined;
 				} else if (data.who === 'creator') {
 					room.playerSocket.emit('deselectDeck');
 					room.creatorDeck = undefined;
-				}
-			}
-		}
-	});
-
-	socket.on('playerReady', function(data) {
-		console.log('playerReady data', data); //{roomName, who:'player'/'creator',ready}
-		var room = {
-			playerSocket:undefined,
-		};
-		var index = 0;
-		var finded = false;
-		for (var i = 0; i < rooms.length; i++) {
-			if (rooms[i].name === data.roomName) {
-				room = rooms[i];
-				finded = true;
-				index = i;
-			}
-		}
-		if(finded) {
-			if(room.playerSocket !== undefined) {
-				if(data.who === 'player') {
-					room.creatorSocket.emit('playerReady');
-					room.playerReady = data.ready;
-					activeGame = room.creatorSocket;
-				} else if (data.who === 'creator') {
-					room.playerSocket.emit('playerReady');
-					room.creatorReady = data.ready;
-					activeGame = room.playerSocket;
-				}
-			}
-		}
-	});
-
-	socket.on('playerNotReady', function(data) {
-		console.log('playerNotReady data', data); //{roomName, who:'player'/'creator',ready}
-		var room = {
-			playerSocket:undefined,
-		};
-		var index = 0;
-		var finded = false;
-		for (var i = 0; i < rooms.length; i++) {
-			if (rooms[i].name === data.roomName) {
-				room = rooms[i];
-				finded = true;
-				index = i;
-			}
-		}
-		if(finded) {
-			if(room.playerSocket !== undefined) {
-				if(data.who === 'player') {
-					room.creatorSocket.emit('playerNotReady');
-					room.playerReady = undefined;
-				} else if (data.who === 'creator') {
-					room.playerSocket.emit('playerNotReady');
-					room.creatorReady = undefined;
+					activeGame = undefined;
 				}
 			}
 		}
@@ -261,6 +209,7 @@ io.on('connection', function (socket) {
 			if(room.playerSocket !== undefined) {
 				room.playerSocket.emit('startGame');
 				rooms.splice(index,1);
+				justRooms.splice(index,1);
 			}
 		}
 	});

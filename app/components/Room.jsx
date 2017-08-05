@@ -16,7 +16,7 @@ export class Room extends React.Component {
 			deck:undefined,
 			enemy:this.props.playerName === this.props.creator 
 				? undefined 
-				: {name:this.props.creator, ready:false},
+				: {name:this.props.creator, ready:false,},
 			// enemy: {
 			// 	name: 'Toxcik',
 			// 	ready: true,
@@ -34,6 +34,28 @@ export class Room extends React.Component {
 			}
 		});
 		socket.on('closeRoom', (data) => {
+			// this.updateRooms(data);
+		});
+		socket.on('selectDeck', (data) => {
+			if(this.state.enemy) {
+				this.setState({
+					enemy: {
+						...this.state.enemy,
+						ready:true,
+					}
+				})
+			}
+			// this.updateRooms(data);
+		});
+		socket.on('deselectDeck', (data) => {
+			if(this.state.enemy) {
+				this.setState({
+					enemy: {
+						...this.state.enemy,
+						ready:false,
+					}
+				})
+			}
 			// this.updateRooms(data);
 		});
 		socket.on('leaveRoom', (data) => {
@@ -72,7 +94,13 @@ export class Room extends React.Component {
 								<div key={uuid()} className='justifySelfCenter alignSelfCenter'>
 								<button 
 								className='button large primary expanded hollow'
-								onClick={(e) => {this.setState({deck});}}
+								onClick={(e) => {
+									this.setState({deck});
+									socket.emit('selectDeck', {
+										roomName:name, 
+										who:playerName !== creator?'player':'creator',
+										deck});
+								}}
 								>
 									Deck: {deck.name}
 								</button></div>)
@@ -81,7 +109,13 @@ export class Room extends React.Component {
 								<div key={uuid()} className='justifySelfCenter alignSelfCenter'>
 								<button 
 								className='button large success expanded hollow'
-								onClick={(e) => {this.setState({deck:undefined});}}
+								onClick={(e) => {
+									this.setState({deck:undefined});
+									socket.emit('deselectDeck', {
+										roomName:name, 
+										who:playerName !== creator?'player':'creator',
+										deck});
+								}}
 								>
 									Deck: {deck.name}
 								</button></div>)
@@ -141,7 +175,14 @@ export class Room extends React.Component {
 						</div>
 						<div className='cardGap'></div>
 						<div className='cardGap'>
-						<button className='button large success expanded' disabled={true}>
+						<button 
+						className='button large success expanded' 
+						disabled={this.state.enemy 
+							? (this.state.enemy.ready && this.state.deck 
+								? false 
+								: true) 
+							: true}
+						>
 							Start game
 						</button>
 						</div>
