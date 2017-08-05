@@ -1,5 +1,6 @@
 import React from 'react';
 import uuid from 'node-uuid';
+import { Route, Redirect } from 'react-router'
 
 import {socket} from 'MainApp';
 import * as DeckAPI from 'DeckAPI';
@@ -17,6 +18,7 @@ export class Room extends React.Component {
 			enemy:this.props.playerName === this.props.creator 
 				? undefined 
 				: {name:this.props.creator, ready:false,},
+			forceStart:false,
 			// enemy: {
 			// 	name: 'Toxcik',
 			// 	ready: true,
@@ -64,6 +66,11 @@ export class Room extends React.Component {
 					enemy:undefined,
 				})
 			}
+		});
+		socket.on('startGame', (data) => {
+			this.setState({
+				forceStart:true,
+			})
 		});
 	}
 	render() {
@@ -182,6 +189,10 @@ export class Room extends React.Component {
 								? false 
 								: true) 
 							: true}
+							onClick={(e) => {
+								e.preventDefault();
+								socket.emit('startGame', {roomName});
+							}}
 						>
 							Start game
 						</button>
@@ -194,6 +205,11 @@ export class Room extends React.Component {
 					
 					</div>
 					)
+			}
+		}
+		var renderRedirect = () => {
+			if(this.state.forceStart) {
+				return (<Redirect push to="/battle"/>)
 			}
 		}
 		return (
@@ -245,6 +261,7 @@ export class Room extends React.Component {
 					</div>
 				</div>
 				<div className="cardGap"></div>
+				{renderRedirect()}
 			</div>
 		);
 	}

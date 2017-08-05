@@ -208,6 +208,7 @@ io.on('connection', function (socket) {
 		if(finded) {
 			if(room.playerSocket !== undefined) {
 				room.playerSocket.emit('startGame');
+				room.creatorSocket.emit('startGame');
 				rooms.splice(index,1);
 				justRooms.splice(index,1);
 			}
