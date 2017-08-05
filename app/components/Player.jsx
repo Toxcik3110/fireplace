@@ -1,7 +1,9 @@
 import React from 'react';
 import uuid from 'node-uuid';
 import {connect} from 'react-redux';
+import {NavLink} from 'react-router-dom';
 
+import {socket} from 'MainApp';
 import Hand from 'Hand';
 import * as actions from 'actions';
 
@@ -14,15 +16,35 @@ export class Player extends React.Component {
 		var {player, ePlayer, pPlayer, playerTurn, user, dispatch} = this.props;
 		var currentPlayer = player == 'player' ? pPlayer : ePlayer;
 		var enemyPlayer = player == 'player' ? pPlayer : ePlayer;
+		var whoIs = player === 'player';
 		if(currentPlayer.hp <= 0) {
-			dispatch(actions.modalShow());
+			var data = {
+				header: ()=>{
+					return (<div>
+							<h1 className='page-title' style={{color:whoIs ? 'red' : 'green'}}>
+								{!whoIs ? 'YOU WIN' : 'YOU LOOSE'}
+							</h1>
+						</div>);
+				},
+				body: ()=>{
+					return (<div>
+								<NavLink to='/' onClick={(e) => {
+									dispatch(actions.modalHide());
+								}} >
+									<button className='button hollow expanded'>Exit</button>
+								</NavLink>
+							</div>);
+				},
+			}
+			dispatch(actions.modalShow(data));
 		}
 		return (
 		<div className="player">
 			<Hand player={player}/>
 			<div className="ManaHp" id={player} onClick={(e) => {
-				if(user.selectedCard && player !== playerTurn && enemyPlayer.hp > 0) {
+				if(user.selectedCard && player !== 'player' && enemyPlayer.hp > 0) {
 					dispatch(actions.attackPlayer(player, user.selectedCard));
+					socket.emit('attackPlayer', {card:user.selectedCard});
 				}
 			}} >
 				<div className="hp">

@@ -19,10 +19,11 @@ export class Deck extends React.Component {
 			this.props.dispatch(actions.placeCardDirect('enemy', data.card));
 		});
 		socket.on('attackCard', (data) => {
-			// this.updateRooms(data);
+			this.props.dispatch(actions.attackCard(data.card1, data.card2));
 		});
 		socket.on('attackPlayer', (data) => {
-			// this.updateRooms(data);
+			console.log('attackPlayer', data)
+			this.props.dispatch(actions.attackPlayer('player', data.card.card));
 		});
 	}
 	render() {
@@ -42,7 +43,7 @@ export class Deck extends React.Component {
 			if(currentPlayer.draw == 0) turnClass = '';
 			return (
 				<div className='CardDeck' onClick={(e) => {
-					if(currentPlayer.draw > 0 && player === 'player' && hand.length < 6) {
+					if(currentPlayer.draw > 0 && player === 'player' && hand.length < 6 && deck.length > 0) {
 						var r = Math.floor(Math.random() * deck.length);
 						dispatch(actions.getCard(player, deck[r]));
 						socket.emit('drawCard');

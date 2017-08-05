@@ -31,6 +31,7 @@ export class Hand extends React.Component {
 				onClick={(e) => {
 					if(card.mana <= currentPlayer.mana && forces.length < 7 && player === playerTurn) {
 						dispatch(actions.placeCard(player, card));
+						socket.emit('placeCard', {card:card});
 					}
 				}}
 				onMouseEnter={(e) => {

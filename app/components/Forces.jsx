@@ -3,6 +3,7 @@ import uuid from 'node-uuid';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 
+import {socket} from 'MainApp';
 import * as actions from 'actions';
 import Card from 'Card';
 
@@ -27,9 +28,10 @@ export class Forces extends React.Component {
 				whereIs={'Forces'}
 				classes={card.classes ? card.classes : ''}
 				onClick={(e) => {
-					var cond = !user.selectedCard && (playerTurn === player) && (card.turn > 0);
+					var cond = !user.selectedCard && (playerTurn === 'player') && (card.turn > 0);
 					if(user.selectedCard && playerTurn !== player) {
 						dispatch(actions.attackCard(user.selectedCard, card));
+						socket.emit('attackCard', {card1:user.selectedCard, card2:card});
 					} else if (cond) {
 						dispatch(actions.selectCard(player, card));
 					} else if (user.selectedCard === card) {
